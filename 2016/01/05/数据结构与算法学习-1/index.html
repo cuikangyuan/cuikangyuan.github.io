@@ -4,17 +4,39 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives | Tim.cui</title>
+  <title>Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
+  <meta name="description" content="#数据结构学习笔记–单链表typedef struct Node
+{
+    ElemType data;       //数据域
+    struct Node* Next;   //存放后继结点地址
+} Node;
+
+typedef struct Node* LinkList
+####获取链表元素算法(C语言实现)    Status GetElem(LinkList L, int i, El">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Tim.cui">
-<meta property="og:url" content="http://cuikangyuan.github.io/archives/index.html">
+<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/05/数据结构与算法学习-1/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description">
+<meta property="og:description" content="#数据结构学习笔记–单链表typedef struct Node
+{
+    ElemType data;       //数据域
+    struct Node* Next;   //存放后继结点地址
+} Node;
+
+typedef struct Node* LinkList
+####获取链表元素算法(C语言实现)    Status GetElem(LinkList L, int i, El">
+<meta property="og:updated_time" content="2016-01-05T13:19:14.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tim.cui">
-<meta name="twitter:description">
+<meta name="twitter:description" content="#数据结构学习笔记–单链表typedef struct Node
+{
+    ElemType data;       //数据域
+    struct Node* Next;   //存放后继结点地址
+} Node;
+
+typedef struct Node* LinkList
+####获取链表元素算法(C语言实现)    Status GetElem(LinkList L, int i, El">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -150,70 +172,111 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-数据结构与算法学习-1" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/05/数据结构与算法学习-1/" class="archive-article-date">
-  	<time datetime="2016-01-05T13:34:51.154Z" itemprop="datePublished">Jan 5</time>
+    <div class="article-meta">
+      <a href="/2016/01/05/数据结构与算法学习-1/" class="article-date">
+  	<time datetime="2016-01-05T13:34:51.154Z" itemprop="datePublished">2016-01-05</time>
 </a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="23_u6570_u636E_u7ED3_u6784_u5B66_u4E60_u7B14_u8BB0_u2013_u5355_u94FE_u8868"><a href="#23_u6570_u636E_u7ED3_u6784_u5B66_u4E60_u7B14_u8BB0_u2013_u5355_u94FE_u8868" class="headerlink" title="#数据结构学习笔记–单链表"></a>#数据结构学习笔记–单链表</h2><pre><code>typedef struct Node
+{
+    ElemType data;       //数据域
+    struct Node* Next;   //存放后继结点地址
+} Node;
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+typedef struct Node* LinkList
+</code></pre><p>####获取链表元素算法(C语言实现)<br>    Status GetElem(LinkList L, int i, ElemType *e)<br>    {<br>        int j;<br>        LinkList p;</p>
+<pre><code>   p = L-&gt;Next
+   j = 1;
+
+   while(p &amp;&amp; j&lt;i)
+   {
+       p = p-&gt;Next;
+       ++j;
+   }
+
+   if(!p || j&gt;i)
+   {
+       return ERROR;
+   }
+   *e = p-&gt;data;
+
+   return OK;        
+}
+</code></pre>
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/01/Hexo注意事项/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo搭建博客时的备忘</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/01/Hexo注意事项/" class="archive-article-date">
-  	<time datetime="2016-01-01T10:50:36.223Z" itemprop="datePublished">Jan 1</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/01/Hexo注意事项/">Hexo搭建博客时的备忘</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-    
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="数据结构与算法学习-1" data-title="" data-url="http://cuikangyuan.github.io/2016/01/05/数据结构与算法学习-1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -239,8 +302,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false
