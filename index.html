@@ -156,7 +156,7 @@
   
     <div class="article-meta">
       <a href="/2016/01/05/数据结构与算法学习-1/" class="article-date">
-  	<time datetime="2016-01-05T13:34:51.154Z" itemprop="datePublished">2016-01-05</time>
+  	<time datetime="2016-01-05T13:42:33.180Z" itemprop="datePublished">2016-01-05</time>
 </a>
     </div>
   
@@ -167,31 +167,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="23_u6570_u636E_u7ED3_u6784_u5B66_u4E60_u7B14_u8BB0_u2013_u5355_u94FE_u8868"><a href="#23_u6570_u636E_u7ED3_u6784_u5B66_u4E60_u7B14_u8BB0_u2013_u5355_u94FE_u8868" class="headerlink" title="#数据结构学习笔记–单链表"></a>#数据结构学习笔记–单链表</h2><pre><code>typedef struct Node
+        <hr>
+<h2 id="title_3A_u6570_u636E_u7ED3_u6784_u5B66_u4E60_u7B14_u8BB0_u2013_u5355_u94FE_u8868"><a href="#title_3A_u6570_u636E_u7ED3_u6784_u5B66_u4E60_u7B14_u8BB0_u2013_u5355_u94FE_u8868" class="headerlink" title="title:数据结构学习笔记–单链表"></a>title:数据结构学习笔记–单链表</h2><pre><code>typedef struct Node
 {
     ElemType data;       //数据域
     struct Node* Next;   //存放后继结点地址
 } Node;
 
 typedef struct Node* LinkList
-</code></pre><p>####获取链表元素算法(C语言实现)<br>    Status GetElem(LinkList L, int i, ElemType *e)<br>    {<br>        int j;<br>        LinkList p;</p>
-<pre><code>   p = L-&gt;Next
-   j = 1;
+</code></pre><h2 id="u83B7_u53D6_u94FE_u8868_u5143_u7D20_u7B97_u6CD5_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u83B7_u53D6_u94FE_u8868_u5143_u7D20_u7B97_u6CD5_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="获取链表元素算法(C语言实现)"></a>获取链表元素算法(C语言实现)</h2><pre><code>Status GetElem(LinkList L, int i, ElemType *e)
+{
+    int j;
+    LinkList p;
 
-   while(p &amp;&amp; j&lt;i)
-   {
-       p = p-&gt;Next;
-       ++j;
-   }
+    p = L-&gt;Next
+    j = 1;
 
-   if(!p || j&gt;i)
-   {
-       return ERROR;
-   }
-   *e = p-&gt;data;
+    while(p &amp;&amp; j&lt;i)
+    {
+        p = p-&gt;Next;
+        ++j;
+    }
 
-   return OK;        
-}
+    if(!p || j&gt;i)
+    {
+        return ERROR;
+    }
+    *e = p-&gt;data;
+
+    return OK;        
+ }
 </code></pre>
       
     </div>
