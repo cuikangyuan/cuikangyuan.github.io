@@ -4,13 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Hexo搭建博客时的备忘]]></title>
-      <url>http://cuikangyuan.github.io/2016/01/05/Hexo%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
-      <content type="html"><![CDATA[<p>在用Hexo+Github搭建个人博客时，注意在配置Deploy时要使用SSH地址而不是Https，否则可能无法上传到Github。<br>推荐以下教程：<a href="http://jingyan.baidu.com/article/d8072ac47aca0fec95cefd2d.html" target="_blank" rel="external">Click Here</a></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[数据结构学习笔记-1]]></title>
       <url>http://cuikangyuan.github.io/2016/01/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/</url>
       <content type="html"><![CDATA[<pre><code> typedef struct Node
@@ -43,6 +36,13 @@ typedef struct Node* LinkList
     return OK;        
  }
 </code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hexo搭建博客时的备忘]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/04/Hexo%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
+      <content type="html"><![CDATA[<p>在用Hexo+Github搭建个人博客时，注意在配置Deploy时要使用SSH地址而不是Https，否则可能无法上传到Github。<br>推荐以下教程：<a href="http://jingyan.baidu.com/article/d8072ac47aca0fec95cefd2d.html" target="_blank" rel="external">Click Here</a></p>
+]]></content>
     </entry>
     
   
