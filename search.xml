@@ -4,6 +4,74 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-2]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/</url>
+      <content type="html"><![CDATA[<pre><code> typedef struct Node
+{
+    ElemType data;       //数据域
+    struct Node* Next;   //存放后继结点地址
+} Node;
+
+typedef struct Node* LinkList
+</code></pre><h2 id="u5355_u94FE_u8868_u63D2_u5165_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u5355_u94FE_u8868_u63D2_u5165_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="单链表插入(C语言实现)"></a>单链表插入(C语言实现)</h2><pre><code>Status ListInsert(LinkList L, int i, ElemType e)
+{
+    int j;
+    LinkList p, s;
+
+    p = L;
+    j = 1;
+
+    while(p &amp;&amp; j&lt;i)
+    {
+        p = p-&gt;Next;
+        ++j;
+    }
+
+    if(!p || j&gt;i)
+    {
+        return ERROR;
+    }
+
+    s = (LinkList)malloc(sizeof(Node));
+    s-&gt;data = e;
+
+    s-&gt;next = p-&gt;next;
+    p-&gt;next = s;
+
+    return OK;        
+ }
+</code></pre><h2 id="u5355_u94FE_u8868_u5220_u9664_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u5355_u94FE_u8868_u5220_u9664_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="单链表删除(C语言实现)"></a>单链表删除(C语言实现)</h2><pre><code>Status ListInsert(LinkList L, int i, ElemType *e)
+{
+    int j;
+    LinkList p, q;
+
+    p = L;
+    j = 1;
+
+    while(p &amp;&amp; j&lt;i)
+    {
+        p = p-&gt;Next;
+        ++j;
+    }
+
+    if(!(p-&gt;next) || j&gt;i)
+    {
+        return ERROR;
+    }
+
+    q = p-&gt;next;
+    p-&gt;next = q-&gt;next;
+
+
+    *e = q-&gt;data;
+    free(q);
+
+    return OK;        
+ }
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-1]]></title>
       <url>http://cuikangyuan.github.io/2016/01/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/</url>
       <content type="html"><![CDATA[<pre><code> typedef struct Node
