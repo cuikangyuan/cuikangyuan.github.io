@@ -5,6 +5,60 @@
     
     <entry>
       <title><![CDATA[数据结构学习笔记-2]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/</url>
+      <content type="html"><![CDATA[<pre><code> typedef struct Node
+{
+    ElemType data;       //数据域
+    struct Node* Next;   //存放后继结点地址
+} Node;
+
+typedef struct Node* LinkList
+</code></pre><h2 id="u5934_u63D2_u6CD5_u5EFA_u7ACB_u5355_u94FE_u8868_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u5934_u63D2_u6CD5_u5EFA_u7ACB_u5355_u94FE_u8868_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="头插法建立单链表(C语言实现)"></a>头插法建立单链表(C语言实现)</h2><pre><code>void CreateListFromHead(LinkList *L, int n)
+{
+
+    LinkList p;
+    int i;
+
+    srand(time(0)); //初始化随机种子
+
+    *L = (LinkList)malloc(sizeof(Node));
+    (*L)-&gt;next = NULL;
+
+    for(i=0; i&lt;n; i++)
+    {
+        p = (LinkList)malloc(sizeof(Node));
+        p-&gt;data = rand()%100+1;
+        p-&gt;next = (*L)-&gt;next;
+        (*L)-&gt;next = p;
+    }        
+ }
+</code></pre><h2 id="u5C3E_u63D2_u6CD5_u5EFA_u7ACB_u5355_u94FE_u8868_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u5C3E_u63D2_u6CD5_u5EFA_u7ACB_u5355_u94FE_u8868_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="尾插法建立单链表(C语言实现)"></a>尾插法建立单链表(C语言实现)</h2><pre><code>void CreateListFromTail(LinkList *L, int n)
+{
+
+    LinkList p,r;
+    int i;
+
+    srand(time(0)); //初始化随机种子
+
+    *L = (LinkList)malloc(sizeof(Node));
+    r = *L
+
+    for(i=0; i&lt;n; i++)
+    {
+        p = (LinkList)malloc(sizeof(Node));
+        p-&gt;data = rand()%100+1;
+
+        r-&gt;next = p;
+        r = p;
+    }
+
+    r-&gt;next = NULL;        
+ }
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[数据结构学习笔记-2]]></title>
       <url>http://cuikangyuan.github.io/2016/01/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/</url>
       <content type="html"><![CDATA[<pre><code> typedef struct Node
 {
