@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[数据结构学习笔记-2]]></title>
+      <title><![CDATA[数据结构学习笔记-3]]></title>
       <url>http://cuikangyuan.github.io/2016/01/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/</url>
       <content type="html"><![CDATA[<pre><code> typedef struct Node
 {
