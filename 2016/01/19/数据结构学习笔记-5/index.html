@@ -4,54 +4,48 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>数据结构学习笔记-4 | Tim.cui</title>
+  <title>数据结构学习笔记-5 | Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="typedef struct Node
-{
-    ElemType data;       //数据域
-    struct Node* Next;   //存放后继结点地址
-} Node;
-
-typedef struct Node* LinkList
-单链表整表删除(C语言实现)void ClearList(LinkList *L)
+  <meta name="description" content="静态链表的插入操作(C语言实现)//获得空闲分量的下标
+int Malloc_SLL(StaticLinkList space)
 {
 
-    LinkList p, q;
-
-    p =">
+    int i = space[0].cur;
+    if(space[0].cur)
+    {
+        //更新备用分量
+        space[0].cur = space[i].cur;
+        return i;
+    }">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构学习笔记-4">
-<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/11/数据结构学习笔记-4/index.html">
+<meta property="og:title" content="数据结构学习笔记-5">
+<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/19/数据结构学习笔记-5/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description" content="typedef struct Node
-{
-    ElemType data;       //数据域
-    struct Node* Next;   //存放后继结点地址
-} Node;
-
-typedef struct Node* LinkList
-单链表整表删除(C语言实现)void ClearList(LinkList *L)
+<meta property="og:description" content="静态链表的插入操作(C语言实现)//获得空闲分量的下标
+int Malloc_SLL(StaticLinkList space)
 {
 
-    LinkList p, q;
-
-    p =">
-<meta property="og:updated_time" content="2016-01-11T14:09:31.447Z">
+    int i = space[0].cur;
+    if(space[0].cur)
+    {
+        //更新备用分量
+        space[0].cur = space[i].cur;
+        return i;
+    }">
+<meta property="og:updated_time" content="2016-01-19T14:24:50.545Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构学习笔记-4">
-<meta name="twitter:description" content="typedef struct Node
-{
-    ElemType data;       //数据域
-    struct Node* Next;   //存放后继结点地址
-} Node;
-
-typedef struct Node* LinkList
-单链表整表删除(C语言实现)void ClearList(LinkList *L)
+<meta name="twitter:title" content="数据结构学习笔记-5">
+<meta name="twitter:description" content="静态链表的插入操作(C语言实现)//获得空闲分量的下标
+int Malloc_SLL(StaticLinkList space)
 {
 
-    LinkList p, q;
-
-    p =">
+    int i = space[0].cur;
+    if(space[0].cur)
+    {
+        //更新备用分量
+        space[0].cur = space[i].cur;
+        return i;
+    }">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -187,11 +181,11 @@ typedef struct Node* LinkList
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-数据结构学习笔记-4" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据结构学习笔记-5" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/11/数据结构学习笔记-4/" class="article-date">
-  	<time datetime="2016-01-11T13:54:03.000Z" itemprop="datePublished">2016-01-11</time>
+      <a href="/2016/01/19/数据结构学习笔记-5/" class="article-date">
+  	<time datetime="2016-01-19T13:59:03.000Z" itemprop="datePublished">2016-01-19</time>
 </a>
     </div>
   
@@ -204,7 +198,7 @@ typedef struct Node* LinkList
         
   
     <h1 class="article-title" itemprop="name">
-      数据结构学习笔记-4
+      数据结构学习笔记-5
     </h1>
   
 
@@ -224,30 +218,47 @@ typedef struct Node* LinkList
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code> typedef struct Node
-{
-    ElemType data;       //数据域
-    struct Node* Next;   //存放后继结点地址
-} Node;
-
-typedef struct Node* LinkList
-</code></pre><h2 id="u5355_u94FE_u8868_u6574_u8868_u5220_u9664_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u5355_u94FE_u8868_u6574_u8868_u5220_u9664_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="单链表整表删除(C语言实现)"></a>单链表整表删除(C语言实现)</h2><pre><code>void ClearList(LinkList *L)
+        <h2 id="u9759_u6001_u94FE_u8868_u7684_u63D2_u5165_u64CD_u4F5C_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u9759_u6001_u94FE_u8868_u7684_u63D2_u5165_u64CD_u4F5C_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="静态链表的插入操作(C语言实现)"></a>静态链表的插入操作(C语言实现)</h2><pre><code>//获得空闲分量的下标
+int Malloc_SLL(StaticLinkList space)
 {
 
-    LinkList p, q;
-
-    p = (*L)-&gt;next;
-
-    while(p)
+    int i = space[0].cur;
+    if(space[0].cur)
     {
-        q = p-&gt;next;
-        free(p);
-        p = q;
-    }
-    (*L)-&gt;next = NULL;
+        //更新备用分量
+        space[0].cur = space[i].cur;
+        return i;
+    }             
+}
 
-    return OK;        
- }
+/*在静态链表L中第i个元素之前插入新的数据元素e*/
+Status ListInsert(StaticLinkList L, int i, ElemType e)
+{
+    int j, k, l;
+
+    k = MAX_SIZE - 1; //数组的最后一个元素下标
+
+    if(i&lt;1 || i&gt;ListLength(L)+1)
+    {
+        retrun ERROR;
+    }
+
+    j = Malloc_SLL(L);
+    if(j)
+    {
+        L[j].data = e;
+        for(l=1; l&lt;=i-1; l++)
+        {
+            k = L[k].cur;
+        }
+        L[j].cur = L[k].cur;
+        L[k].cur = j;
+
+        return OK;
+    }
+
+    return ERROR;             
+}
 </code></pre>
       
     </div>
@@ -257,18 +268,9 @@ typedef struct Node* LinkList
     
 <nav id="article-nav">
   
-    <a href="/2016/01/19/数据结构学习笔记-5/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          数据结构学习笔记-5
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/10/数据结构学习笔记-3/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构学习笔记-3</div>
+    <a href="/2016/01/11/数据结构学习笔记-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构学习笔记-4</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -303,7 +305,7 @@ typedef struct Node* LinkList
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="数据结构学习笔记-4" data-title="数据结构学习笔记-4" data-url="http://cuikangyuan.github.io/2016/01/11/数据结构学习笔记-4/"></div>
+	<div class="ds-thread" data-thread-key="数据结构学习笔记-5" data-title="数据结构学习笔记-5" data-url="http://cuikangyuan.github.io/2016/01/19/数据结构学习笔记-5/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
