@@ -6,46 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>数据结构学习笔记-5 | Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="静态链表的插入操作(C语言实现)//获得空闲分量的下标
-int Malloc_SLL(StaticLinkList space)
-{
-
-    int i = space[0].cur;
-    if(space[0].cur)
-    {
-        //更新备用分量
-        space[0].cur = space[i].cur;
-        return i;
-    }">
+  <meta name="description" content="静态链表的插入操作(C语言实现)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构学习笔记-5">
 <meta property="og:url" content="http://cuikangyuan.github.io/2016/01/19/数据结构学习笔记-5/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description" content="静态链表的插入操作(C语言实现)//获得空闲分量的下标
-int Malloc_SLL(StaticLinkList space)
-{
-
-    int i = space[0].cur;
-    if(space[0].cur)
-    {
-        //更新备用分量
-        space[0].cur = space[i].cur;
-        return i;
-    }">
-<meta property="og:updated_time" content="2016-01-19T14:24:50.545Z">
+<meta property="og:description" content="静态链表的插入操作(C语言实现)">
+<meta property="og:updated_time" content="2016-01-19T14:47:09.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构学习笔记-5">
-<meta name="twitter:description" content="静态链表的插入操作(C语言实现)//获得空闲分量的下标
-int Malloc_SLL(StaticLinkList space)
-{
-
-    int i = space[0].cur;
-    if(space[0].cur)
-    {
-        //更新备用分量
-        space[0].cur = space[i].cur;
-        return i;
-    }">
+<meta name="twitter:description" content="静态链表的插入操作(C语言实现)">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -218,7 +188,8 @@ int Malloc_SLL(StaticLinkList space)
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u9759_u6001_u94FE_u8868_u7684_u63D2_u5165_u64CD_u4F5C_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u9759_u6001_u94FE_u8868_u7684_u63D2_u5165_u64CD_u4F5C_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="静态链表的插入操作(C语言实现)"></a>静态链表的插入操作(C语言实现)</h2><pre><code>//获得空闲分量的下标
+        <h2 id="u9759_u6001_u94FE_u8868_u7684_u63D2_u5165_u64CD_u4F5C_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u9759_u6001_u94FE_u8868_u7684_u63D2_u5165_u64CD_u4F5C_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="静态链表的插入操作(C语言实现)"></a>静态链表的插入操作(C语言实现)</h2><a id="more"></a> 
+<pre><code>//获得空闲分量的下标
 int Malloc_SLL(StaticLinkList space)
 {
 
