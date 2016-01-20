@@ -4,6 +4,91 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-7]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-7/</url>
+      <content type="html"><![CDATA[<h2 id="u9762_u8BD5_u9898_u5B9E_u4F8B"><a href="#u9762_u8BD5_u9898_u5B9E_u4F8B" class="headerlink" title="面试题实例"></a>面试题实例</h2><a id="more"></a> 
+<pre><code>//快速找到未知长度单链表的中间结点
+Status FindMidNode(LinkList L, ElemType *e)
+{
+
+    LinkList search, mid;
+    mid = search = L;
+
+    while(search-&gt;next != NULL)
+    {
+        if(search-&gt;next-&gt;next != NULL)
+        {
+            search = search-&gt;next-&gt;next;
+
+            mid = mid-&gt;next;
+        }
+        else
+        {
+            search = search-&gt;next;    
+        }
+    }
+
+    *e = mid-&gt;data;
+
+    return OK;             
+}    
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[数据结构学习笔记-6]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-6/</url>
+      <content type="html"><![CDATA[<h2 id="u9759_u6001_u94FE_u8868_u7684_u5220_u9664_u64CD_u4F5C"><a href="#u9759_u6001_u94FE_u8868_u7684_u5220_u9664_u64CD_u4F5C" class="headerlink" title="静态链表的删除操作"></a>静态链表的删除操作</h2><a id="more"></a> 
+<pre><code>//将下标为k的空闲结点回收到备用链表
+int Free_SLL(StaticLinkList space, int k)
+{
+
+    space[k].cur = space[0].cur;
+    space[0].cur = k;             
+}
+
+/*删除在静态链表L中第i个元素*/
+Status ListInsert(StaticLinkList L, int i)
+{
+    int j, k;
+
+    k = MAX_SIZE - 1; //数组的最后一个元素下标
+
+    if(i&lt;1 || i&gt;ListLength(L)+1)
+    {
+        retrun ERROR;
+    }
+
+    for(j=1; j&lt;=i-1; j++)
+    {
+        k = L[k].cur;
+    }
+
+    j = L[k].cur; //待释放下标
+    L[k].cur = L[j].cur;//将释放的位置的前一个结点游标移动
+
+    return OK;             
+}
+
+/*返回L中数据元素的个数*/
+int ListLength(StaticLinkList L)
+{
+    int j = 0;
+    int i = L[MAX_SIZE-1].cur;//真实存放元素的结点从下标1开始
+
+    while(i)
+    {
+        i = L[i].cur;//游标移动
+        j++;
+    }
+
+    return j;
+
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-5]]></title>
       <url>http://cuikangyuan.github.io/2016/01/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-5/</url>
       <content type="html"><![CDATA[<h2 id="u9759_u6001_u94FE_u8868_u7684_u63D2_u5165_u64CD_u4F5C_28C_u8BED_u8A00_u5B9E_u73B0_29"><a href="#u9759_u6001_u94FE_u8868_u7684_u63D2_u5165_u64CD_u4F5C_28C_u8BED_u8A00_u5B9E_u73B0_29" class="headerlink" title="静态链表的插入操作(C语言实现)"></a>静态链表的插入操作(C语言实现)</h2><a id="more"></a> 
