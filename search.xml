@@ -4,6 +4,77 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-9]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-9/</url>
+      <content type="html"><![CDATA[<h2 id="u7EA6_u745F_u592B_u73AF"><a href="#u7EA6_u745F_u592B_u73AF" class="headerlink" title="约瑟夫环"></a>约瑟夫环</h2><a id="more"></a> 
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+
+node *create(int n)
+{
+    node *p = NULL, *head;
+    head = (node *)malloc(sizeof(node));
+    p = head;
+    node *s;
+    int i = 1;
+
+    if(0 != n)
+    {
+        while(i &lt;= n)
+        {
+            s = (node *)malloc(sizeof(node));
+            s-&gt;data = i++;
+            p-&gt;next = s;
+            p = s;
+        }
+        s-&gt;next = head-&gt;next;
+    }
+    free(head);
+
+    return s-&gt;next;
+}
+
+int main()
+{
+    int n = 41;
+    int m = 3;
+    int i;
+    node *p = create(n);
+    node *temp;
+
+    m %= n;
+
+    while(p != p-&gt;next)
+    {
+        for(i=1; i&lt;m-1; i++)
+        {
+            p = p-&gt;next;
+        }
+
+        printf(&quot;%d-&gt;&quot;, p-&gt;next-&gt;data);
+        temp = p-&gt;next;
+        p-&gt;next = temp-&gt;next;
+
+        free(temp);
+
+        p = p-&gt;next;
+    }
+
+
+    printf(&quot;%d\n&quot;, p-&gt;data);
+
+    return 0;
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-8]]></title>
       <url>http://cuikangyuan.github.io/2016/01/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-8/</url>
       <content type="html"><![CDATA[<h2 id="u5FAA_u73AF_u94FE_u8868"><a href="#u5FAA_u73AF_u94FE_u8868" class="headerlink" title="循环链表"></a>循环链表</h2><pre><code>/*链表存储结构的定义*/
