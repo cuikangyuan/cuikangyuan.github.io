@@ -4,18 +4,33 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>数据结构学习笔记-7 | Tim.cui</title>
+  <title>数据结构学习笔记-8 | Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="面试题实例">
+  <meta name="description" content="循环链表/*链表存储结构的定义*/
+typedef struct CLinkList
+{
+    int data;
+    struct CLinkList *next;
+}node;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构学习笔记-7">
-<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/20/数据结构学习笔记-7/index.html">
+<meta property="og:title" content="数据结构学习笔记-8">
+<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/23/数据结构学习笔记-8/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description" content="面试题实例">
-<meta property="og:updated_time" content="2016-01-20T13:05:01.857Z">
+<meta property="og:description" content="循环链表/*链表存储结构的定义*/
+typedef struct CLinkList
+{
+    int data;
+    struct CLinkList *next;
+}node;">
+<meta property="og:updated_time" content="2016-01-23T03:14:17.113Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构学习笔记-7">
-<meta name="twitter:description" content="面试题实例">
+<meta name="twitter:title" content="数据结构学习笔记-8">
+<meta name="twitter:description" content="循环链表/*链表存储结构的定义*/
+typedef struct CLinkList
+{
+    int data;
+    struct CLinkList *next;
+}node;">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -151,11 +166,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-数据结构学习笔记-7" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据结构学习笔记-8" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/20/数据结构学习笔记-7/" class="article-date">
-  	<time datetime="2016-01-20T13:04:11.000Z" itemprop="datePublished">2016-01-20</time>
+      <a href="/2016/01/23/数据结构学习笔记-8/" class="article-date">
+  	<time datetime="2016-01-23T02:02:11.000Z" itemprop="datePublished">2016-01-23</time>
 </a>
     </div>
   
@@ -168,7 +183,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      数据结构学习笔记-7
+      数据结构学习笔记-8
     </h1>
   
 
@@ -177,7 +192,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
 	</div>
 
         
@@ -188,32 +203,161 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u9762_u8BD5_u9898_u5B9E_u4F8B"><a href="#u9762_u8BD5_u9898_u5B9E_u4F8B" class="headerlink" title="面试题实例"></a>面试题实例</h2><a id="more"></a> 
-<pre><code>//快速找到未知长度单链表的中间结点
-Status FindMidNode(LinkList L, ElemType *e)
+        <h2 id="u5FAA_u73AF_u94FE_u8868"><a href="#u5FAA_u73AF_u94FE_u8868" class="headerlink" title="循环链表"></a>循环链表</h2><pre><code>/*链表存储结构的定义*/
+typedef struct CLinkList
 {
+    int data;
+    struct CLinkList *next;
+}node;
+</code></pre><a id="more"></a> 
+<pre><code>/*初始化循环链表*/
+void ds_init(node **pNode)
+{
+    int item;
+    node *temp;
+    node *target;
 
-    LinkList search, mid;
-    mid = search = L;
+    printf(&quot;输入结点的值，输入0完成初始化\n&quot;);
 
-    while(search-&gt;next != NULL)
+    while(1)
     {
-        if(search-&gt;next-&gt;next != NULL)
-        {
-            search = search-&gt;next-&gt;next;
+        scanf(&quot;%d&quot;, &amp;item);
+        fflush(stdin);
 
-            mid = mid-&gt;next;
+        if(item == 0)
+            return;
+
+        if((*pNode) == NULL)
+        {
+            /*循环链表此时只有一个结点*/
+            *pNode = (node*)malloc(sizeof(struct CLinkList));
+            if(!(*pNode))
+                exit(0);
+            (*pNode)-&gt;data = item;
+            (*pNode)-&gt;next = *pNode;
         }
         else
         {
-            search = search-&gt;next;    
+            /*找到要插入元素的位置*/
+            for(target=(*pNode);target-&gt;next!=(*pNode);target=target-&gt;next)
+            ;
+            /*生成一个新的结点*/
+            temp = (node *)malloc(sizeof(struct CLinkList));
+
+            if(!temp)
+                exit(0);
+
+            temp-&gt;data = item;
+            temp-&gt;next = *pNode;
+            target-&gt;next = temp;
+
         }
     }
+}
 
-    *e = mid-&gt;data;
+/*插入结点*/
+/*参数: 链表的第一个结点，插入的位置*/
+void ds_insert(node **pNode, int i)
+{
+    node *temp;
+    node *target;
+    node *p;
+    int item;
+    int j=1;
 
-    return OK;             
-}    
+    printf(&quot;输入要插入结点的值:&quot;);
+    scanf(&quot;%d&quot;, &amp;item);
+
+    if(i == 1)
+    {
+        //新插入的结点作为第一个结点
+        temp = (node *)malloc(sizeof(strut CLinkList));
+
+        if(!temp)
+            exit(0);
+
+        temp-&gt;data = item;
+
+        //寻找最后一个结点
+        for(target=(*pNode);target-&gt;next!=(*pNode);target=target-&gt;next)
+            ;
+        temp-&gt;next = (*pNode);
+        target-&gt;next = temp;
+        *pNode = temp;
+
+    }
+    else
+    {
+        target = *pNode;
+        for(; j&lt;(i-1); ++j)
+        {
+            target = target-&gt;next;
+        }
+        temp = (node *)malloc(sizeof(struct CLinkList));
+
+        if(!temp)
+            exit(0);
+        temp-&gt;data = item;
+        p = target-&gt;next;
+        target-&gt;next = temp;
+        temp-&gt;next = p;
+
+    }
+}
+
+/*删除结点*/
+void ds_delete(node **pNode, int i)
+{
+    node *target;
+    node *temp;
+
+    int j = 1;
+
+    if(i == 1)
+    {
+        //删除的是第一个结点
+
+        //找到最后一个结点
+        for(target=*pNode;target-&gt;next!=*pNode;target=target-&gt;next)
+            ;
+        temp = *pNode;
+        *pNode = (*pNode)-&gt;next;
+        target-&gt;next = *pNode;
+        free(temp);
+
+    }
+    else
+    {
+        target = *pNode;
+
+        for(; j&lt;i-1; ++j)
+        {
+            target = target-&gt;next;
+        }
+
+        temp = target-&gt;next;
+        target-&gt;next = temp-&gt;next;
+        free(temp);
+    }
+}
+
+/*返回结点所在位置*/
+int ds_search(node *pNode, int elem)
+{
+    node *target;
+    int i = 1;
+
+    for(target=pNode; target-&gt;data!=elem&amp;&amp;target-&gt;next!=pNode; ++i)
+    {
+        target = target-&gt;next;
+    }
+
+    //表中不存在该元素
+    if(target-&gt;next == pNode)
+        return -1;
+    else
+        return i;
+}
 </code></pre>
       
     </div>
@@ -223,18 +367,9 @@ Status FindMidNode(LinkList L, ElemType *e)
     
 <nav id="article-nav">
   
-    <a href="/2016/01/23/数据结构学习笔记-8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          数据结构学习笔记-8
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/20/数据结构学习笔记-6/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构学习笔记-6</div>
+    <a href="/2016/01/20/数据结构学习笔记-7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构学习笔记-7</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -269,7 +404,7 @@ Status FindMidNode(LinkList L, ElemType *e)
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="数据结构学习笔记-7" data-title="数据结构学习笔记-7" data-url="http://cuikangyuan.github.io/2016/01/20/数据结构学习笔记-7/"></div>
+	<div class="ds-thread" data-thread-key="数据结构学习笔记-8" data-title="数据结构学习笔记-8" data-url="http://cuikangyuan.github.io/2016/01/23/数据结构学习笔记-8/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
