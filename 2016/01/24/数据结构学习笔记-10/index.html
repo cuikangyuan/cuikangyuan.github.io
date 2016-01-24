@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>数据结构学习笔记-9 | Tim.cui</title>
+  <title>数据结构学习笔记-10 | Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="约瑟夫环">
+  <meta name="description" content="判断单链表中是否有环">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构学习笔记-9">
-<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/23/数据结构学习笔记-9/index.html">
+<meta property="og:title" content="数据结构学习笔记-10">
+<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/24/数据结构学习笔记-10/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description" content="约瑟夫环">
-<meta property="og:updated_time" content="2016-01-23T09:42:16.001Z">
+<meta property="og:description" content="判断单链表中是否有环">
+<meta property="og:updated_time" content="2016-01-24T08:01:57.984Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构学习笔记-9">
-<meta name="twitter:description" content="约瑟夫环">
+<meta name="twitter:title" content="数据结构学习笔记-10">
+<meta name="twitter:description" content="判断单链表中是否有环">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -151,11 +151,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-数据结构学习笔记-9" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据结构学习笔记-10" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/23/数据结构学习笔记-9/" class="article-date">
-  	<time datetime="2016-01-23T09:40:11.000Z" itemprop="datePublished">2016-01-23</time>
+      <a href="/2016/01/24/数据结构学习笔记-10/" class="article-date">
+  	<time datetime="2016-01-24T07:59:11.000Z" itemprop="datePublished">2016-01-24</time>
 </a>
     </div>
   
@@ -168,7 +168,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      数据结构学习笔记-9
+      数据结构学习笔记-10
     </h1>
   
 
@@ -188,70 +188,134 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u7EA6_u745F_u592B_u73AF"><a href="#u7EA6_u745F_u592B_u73AF" class="headerlink" title="约瑟夫环"></a>约瑟夫环</h2><a id="more"></a> 
+        <h2 id="u5224_u65AD_u5355_u94FE_u8868_u4E2D_u662F_u5426_u6709_u73AF"><a href="#u5224_u65AD_u5355_u94FE_u8868_u4E2D_u662F_u5426_u6709_u73AF" class="headerlink" title="判断单链表中是否有环"></a>判断单链表中是否有环</h2><a id="more"></a> 
 <pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
 
-typedef struct node
+#define OK 1
+#define ERROR 0
+#define TRUE 1
+#define FALSE 0
+
+
+typedef int Status;
+typedef int ElemType;
+
+typedef struct Node
 {
-    int data;
-    struct node *next;
-}node;
+    ElemType data;
+    struct Node *next;
+}Node, *LinkList;
 
-node *create(int n)
+
+Status InitList(LinkList *L)
 {
-    node *p = NULL, *head;
-    head = (node *)malloc(sizeof(node));
-    p = head;
-    node *s;
-    int i = 1;
+    *L = (LinkList)malloc(sizeof(Node));
 
-    if(0 != n)
+    if(!(*L))
     {
-        while(i &lt;= n)
-        {
-            s = (node *)malloc(sizeof(node));
-            s-&gt;data = i++;
-            p-&gt;next = s;
-            p = s;
-        }
-        s-&gt;next = head-&gt;next;
+        return ERROR;
     }
-    free(head);
 
-    return s-&gt;next;
+    (*L)-&gt;next = NULL;
+
+    return OK;
+}
+
+void CreateListTail(LinkList *L, int n)
+{
+    LinkList p, r;
+    int i;
+
+    srand(time(0));/*初始化随机数种子*/
+
+    *L = (LinkList)malloc(sizeof(Node));
+
+    r = *L;/*r 指向尾部结点*/
+
+    for(i=0; i&lt;n; i++)
+    {
+        p = (Node *)malloc(sizeof(Node));
+        p-&gt;data = rand()%100 + 1;
+        r-&gt;next = p;
+        r = p;
+    }
+
+    r-&gt;next = (*L)-&gt;next-&gt;next-&gt;next;
+}
+
+//比较步数的方法
+int HasLoop1(LinkList L)
+{
+    LinkList cur1 = L;
+    int pos1 = 0;
+
+    while(cur1)
+    {
+        LinkList cur2 = L;
+        int pos2 = 0;
+        while(cur2)
+        {
+            if(cur2 == cur1)
+            {
+                if(pos1 == pos2)
+                {
+                    break;
+                }
+                else
+                {
+                    printf(&quot;Loop is at     position %d \n&quot;, pos2);
+                    return 1;
+                }
+            }
+
+            cur2 = cur2-&gt;next;
+            pos2++;
+        }
+
+        cur1 = cur1-&gt;next;
+        pos1++;
+    }
+    return 0;
+}
+
+//快慢指针的方法
+int HasLoop2(LinkList L)
+{
+    int step1 = 1;
+    int step2 = 2;
+
+    LinkList p = L;
+    LinkList q = L;
+
+    while(p!=NULL &amp;&amp; q!=NULL &amp;&amp; q-&gt;next!=NULL)
+    {
+        p = p-&gt;next;
+        if(q-&gt;next != NULL)
+            q = q-&gt;next-&gt;next;
+
+        printf(&quot;p:%d, q:%d \n&quot;, p-&gt;data, q-&gt;data);
+
+        if(p == q)
+            return 1;
+    }
+    return 0;
 }
 
 int main()
 {
-    int n = 41;
-    int m = 3;
-    int i;
-    node *p = create(n);
-    node *temp;
+    LinkList L;
+    int i = InitList(&amp;L);
 
-    m %= n;
+    CreateListTail(&amp;L, 6);
 
-    while(p != p-&gt;next)
-    {
-        for(i=1; i&lt;m-1; i++)
-        {
-            p = p-&gt;next;
-        }
+    HasLoop1(L);
 
-        printf(&quot;%d-&gt;&quot;, p-&gt;next-&gt;data);
-        temp = p-&gt;next;
-        p-&gt;next = temp-&gt;next;
-
-        free(temp);
-
-        p = p-&gt;next;
-    }
-
-
-    printf(&quot;%d\n&quot;, p-&gt;data);
+    HasLoop2(L);
 
     return 0;
+
 }
 </code></pre>
       
@@ -262,18 +326,18 @@ int main()
     
 <nav id="article-nav">
   
-    <a href="/2016/01/24/数据结构学习笔记-10/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/01/24/数据结构学习笔记-11/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          数据结构学习笔记-10
+          数据结构学习笔记-11
         
       </div>
     </a>
   
   
-    <a href="/2016/01/23/数据结构学习笔记-8/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构学习笔记-8</div>
+    <a href="/2016/01/23/数据结构学习笔记-9/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构学习笔记-9</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -308,7 +372,7 @@ int main()
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="数据结构学习笔记-9" data-title="数据结构学习笔记-9" data-url="http://cuikangyuan.github.io/2016/01/23/数据结构学习笔记-9/"></div>
+	<div class="ds-thread" data-thread-key="数据结构学习笔记-10" data-title="数据结构学习笔记-10" data-url="http://cuikangyuan.github.io/2016/01/24/数据结构学习笔记-10/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

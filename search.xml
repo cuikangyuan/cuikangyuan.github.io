@@ -4,6 +4,165 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-11]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-11/</url>
+      <content type="html"><![CDATA[<h2 id="u5FAA_u73AF_u94FE_u8868_u5408_u5E76"><a href="#u5FAA_u73AF_u94FE_u8868_u5408_u5E76" class="headerlink" title="循环链表合并"></a>循环链表合并</h2><pre><code>//假设A， B为非空循环链表的尾指针
+LinkList Connect(LinkList A, LinkList B)
+{
+    //保存A表的头结点位置
+    LinkList p = A-&gt;next;
+
+    //B表的开始结点链接到A表尾
+    A-&gt;next = B-&gt;next-&gt;next;
+
+    //释放B表头结点
+    free(B-&gt;next);
+
+    B-&gt;next = p;
+
+    //返回新循环链表的尾指针
+    return B; 
+
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[数据结构学习笔记-10]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-10/</url>
+      <content type="html"><![CDATA[<h2 id="u5224_u65AD_u5355_u94FE_u8868_u4E2D_u662F_u5426_u6709_u73AF"><a href="#u5224_u65AD_u5355_u94FE_u8868_u4E2D_u662F_u5426_u6709_u73AF" class="headerlink" title="判断单链表中是否有环"></a>判断单链表中是否有环</h2><a id="more"></a> 
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+#define OK 1
+#define ERROR 0
+#define TRUE 1
+#define FALSE 0
+
+
+typedef int Status;
+typedef int ElemType;
+
+typedef struct Node
+{
+    ElemType data;
+    struct Node *next;
+}Node, *LinkList;
+
+
+Status InitList(LinkList *L)
+{
+    *L = (LinkList)malloc(sizeof(Node));
+
+    if(!(*L))
+    {
+        return ERROR;
+    }
+
+    (*L)-&gt;next = NULL;
+
+    return OK;
+}
+
+void CreateListTail(LinkList *L, int n)
+{
+    LinkList p, r;
+    int i;
+
+    srand(time(0));/*初始化随机数种子*/
+
+    *L = (LinkList)malloc(sizeof(Node));
+
+    r = *L;/*r 指向尾部结点*/
+
+    for(i=0; i&lt;n; i++)
+    {
+        p = (Node *)malloc(sizeof(Node));
+        p-&gt;data = rand()%100 + 1;
+        r-&gt;next = p;
+        r = p;
+    }
+
+    r-&gt;next = (*L)-&gt;next-&gt;next-&gt;next;
+}
+
+//比较步数的方法
+int HasLoop1(LinkList L)
+{
+    LinkList cur1 = L;
+    int pos1 = 0;
+
+    while(cur1)
+    {
+        LinkList cur2 = L;
+        int pos2 = 0;
+        while(cur2)
+        {
+            if(cur2 == cur1)
+            {
+                if(pos1 == pos2)
+                {
+                    break;
+                }
+                else
+                {
+                    printf(&quot;Loop is at     position %d \n&quot;, pos2);
+                    return 1;
+                }
+            }
+
+            cur2 = cur2-&gt;next;
+            pos2++;
+        }
+
+        cur1 = cur1-&gt;next;
+        pos1++;
+    }
+    return 0;
+}
+
+//快慢指针的方法
+int HasLoop2(LinkList L)
+{
+    int step1 = 1;
+    int step2 = 2;
+
+    LinkList p = L;
+    LinkList q = L;
+
+    while(p!=NULL &amp;&amp; q!=NULL &amp;&amp; q-&gt;next!=NULL)
+    {
+        p = p-&gt;next;
+        if(q-&gt;next != NULL)
+            q = q-&gt;next-&gt;next;
+
+        printf(&quot;p:%d, q:%d \n&quot;, p-&gt;data, q-&gt;data);
+
+        if(p == q)
+            return 1;
+    }
+    return 0;
+}
+
+int main()
+{
+    LinkList L;
+    int i = InitList(&amp;L);
+
+    CreateListTail(&amp;L, 6);
+
+    HasLoop1(L);
+
+    HasLoop2(L);
+
+    return 0;
+
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-9]]></title>
       <url>http://cuikangyuan.github.io/2016/01/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-9/</url>
       <content type="html"><![CDATA[<h2 id="u7EA6_u745F_u592B_u73AF"><a href="#u7EA6_u745F_u592B_u73AF" class="headerlink" title="约瑟夫环"></a>约瑟夫环</h2><a id="more"></a> 
