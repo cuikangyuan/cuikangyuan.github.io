@@ -4,48 +4,57 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>数据结构学习笔记-11 | Tim.cui</title>
+  <title>数据结构学习笔记-12 | Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="循环链表合并//假设A， B为非空循环链表的尾指针
-LinkList Connect(LinkList A, LinkList B)
+  <meta name="description" content="魔术师发牌问题#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+#define CardNumber 13
+
+typedef struct node
 {
-    //保存A表的头结点位置
-    LinkList p = A-&amp;gt;next;
+    int data;
+    struct node *next;
+}sqlist, *linklist;
 
-    //B表的开始结点链接到A表尾
-    A-&amp;gt;next = B-&amp;gt;next-&amp;gt;next;
-
-    //释放B表头结点
-    free(B-">
+linklist CreateLinkList()
+{
+    linkli">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构学习笔记-11">
-<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/24/数据结构学习笔记-11/index.html">
+<meta property="og:title" content="数据结构学习笔记-12">
+<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/26/数据结构学习笔记-12/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description" content="循环链表合并//假设A， B为非空循环链表的尾指针
-LinkList Connect(LinkList A, LinkList B)
+<meta property="og:description" content="魔术师发牌问题#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+#define CardNumber 13
+
+typedef struct node
 {
-    //保存A表的头结点位置
-    LinkList p = A-&amp;gt;next;
+    int data;
+    struct node *next;
+}sqlist, *linklist;
 
-    //B表的开始结点链接到A表尾
-    A-&amp;gt;next = B-&amp;gt;next-&amp;gt;next;
-
-    //释放B表头结点
-    free(B-">
-<meta property="og:updated_time" content="2016-01-24T08:11:10.652Z">
+linklist CreateLinkList()
+{
+    linkli">
+<meta property="og:updated_time" content="2016-01-26T15:00:07.953Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构学习笔记-11">
-<meta name="twitter:description" content="循环链表合并//假设A， B为非空循环链表的尾指针
-LinkList Connect(LinkList A, LinkList B)
+<meta name="twitter:title" content="数据结构学习笔记-12">
+<meta name="twitter:description" content="魔术师发牌问题#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+#define CardNumber 13
+
+typedef struct node
 {
-    //保存A表的头结点位置
-    LinkList p = A-&amp;gt;next;
+    int data;
+    struct node *next;
+}sqlist, *linklist;
 
-    //B表的开始结点链接到A表尾
-    A-&amp;gt;next = B-&amp;gt;next-&amp;gt;next;
-
-    //释放B表头结点
-    free(B-">
+linklist CreateLinkList()
+{
+    linkli">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -181,11 +190,11 @@ LinkList Connect(LinkList A, LinkList B)
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-数据结构学习笔记-11" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据结构学习笔记-12" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/24/数据结构学习笔记-11/" class="article-date">
-  	<time datetime="2016-01-24T08:05:11.000Z" itemprop="datePublished">2016-01-24</time>
+      <a href="/2016/01/26/数据结构学习笔记-12/" class="article-date">
+  	<time datetime="2016-01-26T14:58:11.000Z" itemprop="datePublished">2016-01-26</time>
 </a>
     </div>
   
@@ -198,7 +207,7 @@ LinkList Connect(LinkList A, LinkList B)
         
   
     <h1 class="article-title" itemprop="name">
-      数据结构学习笔记-11
+      数据结构学习笔记-12
     </h1>
   
 
@@ -218,23 +227,92 @@ LinkList Connect(LinkList A, LinkList B)
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u5FAA_u73AF_u94FE_u8868_u5408_u5E76"><a href="#u5FAA_u73AF_u94FE_u8868_u5408_u5E76" class="headerlink" title="循环链表合并"></a>循环链表合并</h2><pre><code>//假设A， B为非空循环链表的尾指针
-LinkList Connect(LinkList A, LinkList B)
+        <h2 id="u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898"><a href="#u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898" class="headerlink" title="魔术师发牌问题"></a>魔术师发牌问题</h2><pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define CardNumber 13
+
+typedef struct node
 {
-    //保存A表的头结点位置
-    LinkList p = A-&gt;next;
+    int data;
+    struct node *next;
+}sqlist, *linklist;
 
-    //B表的开始结点链接到A表尾
-    A-&gt;next = B-&gt;next-&gt;next;
+linklist CreateLinkList()
+{
+    linklist head = NULL;
+    linklist s, r;
+    int i;
 
-    //释放B表头结点
-    free(B-&gt;next);
+    r = head;
 
-    B-&gt;next = p;
+    for(i=1; i&lt;=CardNumber; i++)
+    {
+        s = (linklist)malloc(sizeof(sqlist));
+        s-&gt;data = 0;
 
-    //返回新循环链表的尾指针
-    return B; 
+        if(head == NULL)
+            head = s;
+        else
+            r-&gt;next = s;
 
+
+        r = s;
+    }
+
+    r-&gt;next = head;
+
+    return head;
+}
+
+void Magician(linklist head)
+{
+    linklist p;
+    int j;
+    int Countnumber = 2;
+
+    p = head;
+    p-&gt;data = 1;
+
+    while(1)
+    {
+        for(j=0; j&lt;Countnumber; j++)
+        {
+            p = p-&gt;next;
+            if(p-&gt;data != 0)
+            {
+                p-&gt;next;
+                j--;
+            }
+        }
+
+        if(p-&gt;data == 0)
+        {
+            p-&gt;data = Countnumber;
+            Countnumber++;
+
+            if(Countnumber == 14)
+                break;
+        }
+    }
+}
+
+
+int main()
+{
+    linklist p;
+    int i;
+
+    p = CreateLinkList();
+    Magician(p);
+
+    for(i=0; i&lt;CardNumber; i++)
+    {
+        printf(&quot;%d &quot;, p-&gt;data);
+        p = p-&gt;next;
+    }
+
+    return 0;
 }
 </code></pre>
       
@@ -245,18 +323,9 @@ LinkList Connect(LinkList A, LinkList B)
     
 <nav id="article-nav">
   
-    <a href="/2016/01/26/数据结构学习笔记-12/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          数据结构学习笔记-12
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/24/数据结构学习笔记-10/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构学习笔记-10</div>
+    <a href="/2016/01/24/数据结构学习笔记-11/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构学习笔记-11</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -291,7 +360,7 @@ LinkList Connect(LinkList A, LinkList B)
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="数据结构学习笔记-11" data-title="数据结构学习笔记-11" data-url="http://cuikangyuan.github.io/2016/01/24/数据结构学习笔记-11/"></div>
+	<div class="ds-thread" data-thread-key="数据结构学习笔记-12" data-title="数据结构学习笔记-12" data-url="http://cuikangyuan.github.io/2016/01/26/数据结构学习笔记-12/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
