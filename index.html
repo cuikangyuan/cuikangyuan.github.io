@@ -152,6 +152,66 @@
 
       <div class="body-wrap">
   
+    <article id="post-数据结构学习笔记-13" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/30/数据结构学习笔记-13/" class="article-date">
+  	<time datetime="2016-01-30T07:10:11.000Z" itemprop="datePublished">2016-01-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/30/数据结构学习笔记-13/">数据结构学习笔记-13</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u53CC_u5411_u5FAA_u73AF_u94FE_u8868_u5B9E_u4F8B"><a href="#u53CC_u5411_u5FAA_u73AF_u94FE_u8868_u5B9E_u4F8B" class="headerlink" title="双向循环链表实例"></a>双向循环链表实例</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/01/30/数据结构学习笔记-13/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-数据结构学习笔记-12" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -178,94 +238,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898"><a href="#u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898" class="headerlink" title="魔术师发牌问题"></a>魔术师发牌问题</h2><pre><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-#define CardNumber 13
-
-typedef struct node
-{
-    int data;
-    struct node *next;
-}sqlist, *linklist;
-
-linklist CreateLinkList()
-{
-    linklist head = NULL;
-    linklist s, r;
-    int i;
-
-    r = head;
-
-    for(i=1; i&lt;=CardNumber; i++)
-    {
-        s = (linklist)malloc(sizeof(sqlist));
-        s-&gt;data = 0;
-
-        if(head == NULL)
-            head = s;
-        else
-            r-&gt;next = s;
-
-
-        r = s;
-    }
-
-    r-&gt;next = head;
-
-    return head;
-}
-
-void Magician(linklist head)
-{
-    linklist p;
-    int j;
-    int Countnumber = 2;
-
-    p = head;
-    p-&gt;data = 1;
-
-    while(1)
-    {
-        for(j=0; j&lt;Countnumber; j++)
-        {
-            p = p-&gt;next;
-            if(p-&gt;data != 0)
-            {
-                p-&gt;next;
-                j--;
-            }
-        }
-
-        if(p-&gt;data == 0)
-        {
-            p-&gt;data = Countnumber;
-            Countnumber++;
-
-            if(Countnumber == 14)
-                break;
-        }
-    }
-}
-
-
-int main()
-{
-    linklist p;
-    int i;
-
-    p = CreateLinkList();
-    Magician(p);
-
-    for(i=0; i&lt;CardNumber; i++)
-    {
-        printf(&quot;%d &quot;, p-&gt;data);
-        p = p-&gt;next;
-    }
-
-    return 0;
-}
-</code></pre>
+        <h2 id="u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898"><a href="#u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898" class="headerlink" title="魔术师发牌问题"></a>魔术师发牌问题</h2>
       
     </div>
     
@@ -278,6 +251,10 @@ int main()
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/01/26/数据结构学习笔记-12/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -471,72 +448,6 @@ LinkList Connect(LinkList A, LinkList B)
       
         <p class="article-more-link">
           <a  href="/2016/01/23/数据结构学习笔记-9/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-数据结构学习笔记-8" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/23/数据结构学习笔记-8/" class="article-date">
-  	<time datetime="2016-01-23T02:02:11.000Z" itemprop="datePublished">2016-01-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/23/数据结构学习笔记-8/">数据结构学习笔记-8</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u5FAA_u73AF_u94FE_u8868"><a href="#u5FAA_u73AF_u94FE_u8868" class="headerlink" title="循环链表"></a>循环链表</h2><pre><code>/*链表存储结构的定义*/
-typedef struct CLinkList
-{
-    int data;
-    struct CLinkList *next;
-}node;
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/23/数据结构学习笔记-8/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

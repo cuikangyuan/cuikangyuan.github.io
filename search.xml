@@ -4,9 +4,115 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-13]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-13/</url>
+      <content type="html"><![CDATA[<h2 id="u53CC_u5411_u5FAA_u73AF_u94FE_u8868_u5B9E_u4F8B"><a href="#u53CC_u5411_u5FAA_u73AF_u94FE_u8868_u5B9E_u4F8B" class="headerlink" title="双向循环链表实例"></a>双向循环链表实例</h2><a id="more"></a>     
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define OK 1
+#define ERROR 0
+
+typedef char ElemType;
+typedef int Status;
+
+typedef struct DualNode
+{
+        ElemType data;
+        struct DualNode *prior;
+        struct DualNode *next;
+}DualNode, *DuLinkList;
+
+Status InitLisk(DuLinkList *L)
+{
+        DualNode *p, *q;
+        int i;
+
+        *L = (DuLinkList)malloc(sizeof(DualNode));
+
+        if( !(*L) )
+        {
+            return ERROR;
+        }
+
+    (*L)-&gt;next = (*L)-&gt;prior = NULL;
+    p = (*L);
+
+    for(i=0; i&lt;26; ++i)
+       {
+            q = (DualNode *)malloc(sizeof(DualNode));
+            if( !q )
+        {
+            return ERROR;
+        }
+
+        q-&gt;data = &apos;A&apos;+i;
+
+        q-&gt;prior = p;
+        q-&gt;next = p-&gt;next;
+        p-&gt;next = q;
+
+        p = q;
+    }
+
+    p-&gt;next = (*L)-&gt;next;
+    (*L)-&gt;next-&gt;prior = p;
+
+    return OK;
+}
+
+void Caesar(DuLinkList *L, int i)
+{
+    if(i &gt; 0 )
+    {
+        do
+        {
+            (*L) = (*L)-&gt;next;
+        }while( --i);
+    }
+
+    if(i &lt; 0 )
+    {
+
+        i=i-1;
+        (*L)=(*L)-&gt;next;
+
+        do
+        {
+            (*L)=(*L)-&gt;prior;
+        }while(++i);
+
+    }
+}
+
+int main()
+{
+    DuLinkList L;
+    int i, n;
+
+    InitLisk(&amp;L);
+    printf(&quot;请输入一个整数: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+
+    Caesar(&amp;L, n);
+
+    for(i=0; i&lt;26; i++)
+    {
+        L = L-&gt;next;
+        printf(&quot;%c&quot;, L-&gt;data);
+    }
+
+    return 0;
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-12]]></title>
       <url>http://cuikangyuan.github.io/2016/01/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-12/</url>
-      <content type="html"><![CDATA[<h2 id="u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898"><a href="#u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898" class="headerlink" title="魔术师发牌问题"></a>魔术师发牌问题</h2><pre><code>#include &lt;stdio.h&gt;
+      <content type="html"><![CDATA[<h2 id="u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898"><a href="#u9B54_u672F_u5E08_u53D1_u724C_u95EE_u9898" class="headerlink" title="魔术师发牌问题"></a>魔术师发牌问题</h2><a id="more"></a>     
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
 #define CardNumber 13
