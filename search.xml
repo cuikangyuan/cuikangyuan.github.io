@@ -4,6 +4,100 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-14]]></title>
+      <url>http://cuikangyuan.github.io/2016/01/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-14/</url>
+      <content type="html"><![CDATA[<h2 id="u6808_u7684_u57FA_u672C_u64CD_u4F5C"><a href="#u6808_u7684_u57FA_u672C_u64CD_u4F5C" class="headerlink" title="栈的基本操作"></a>栈的基本操作</h2><a id="more"></a>     
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define ElemType int
+#define STACK_INIT_SIZE 100
+#define STACK_INCREMENT 10
+
+typedef struct
+{
+    ElemType *base;
+    ElemType *top;
+       int stackSize;
+
+}sqStack;
+
+void initStack(sqStack *s)
+{
+    s-&gt;base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType));
+    if( !s-&gt;base )
+    {
+        exit(0);
+    }
+    s-&gt;top = s-&gt;base;
+    s-&gt;stackSize = STACK_INIT_SIZE;
+}
+
+void Push(sqStack *s, ElemType e)
+{
+    if(s-&gt;top - s-&gt;base &gt;= s-&gt;stackSize)
+    {
+        s-&gt;base = realloc(s-&gt;base, (s-&gt;stackSize+STACK_INCREMENT)*sizeof(ElemType));
+
+        if( !s-&gt;base )
+        {
+            exit(0);
+        }
+
+        s-&gt;top = s-&gt;base + s-&gt;stackSize;
+        s-&gt;stackSize = s-&gt;stackSize+STACK_INCREMENT;
+    }
+
+    *(s-&gt;top) = e;
+    s-&gt;top++;
+
+}
+
+ElemType * Pop(sqStack *s, ElemType *e)
+{
+    if(s-&gt;top == s-&gt;base)
+        return;
+
+    *e = *--(s-&gt;top);
+
+    return e;
+}
+
+void DestroyStack(sqStack *s)
+{
+    int i, len;
+    len = s-&gt;stackSize;
+
+    for(i=0; i&lt;len; i++)
+    {
+        free(s-&gt;base);
+        s-&gt;base++;
+    }
+
+    s-&gt;base = s-&gt;top = NULL;
+    s-&gt;stackSize = 0;
+}
+
+void ClearStack(sqStack *s)
+{
+    s-&gt;top = s-&gt;base;
+}
+
+
+int StackLen(sqStack s)
+{
+    return (s.top - s.base);
+}
+
+int main()
+{
+
+    return 0;
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-13]]></title>
       <url>http://cuikangyuan.github.io/2016/01/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-13/</url>
       <content type="html"><![CDATA[<h2 id="u53CC_u5411_u5FAA_u73AF_u94FE_u8868_u5B9E_u4F8B"><a href="#u53CC_u5411_u5FAA_u73AF_u94FE_u8868_u5B9E_u4F8B" class="headerlink" title="双向循环链表实例"></a>双向循环链表实例</h2><a id="more"></a>     
