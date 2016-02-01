@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>数据结构学习笔记-14 | Tim.cui</title>
+  <title>数据结构学习笔记-15 | Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="栈的基本操作">
+  <meta name="description" content="利用栈实现二进制转成十进制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构学习笔记-14">
-<meta property="og:url" content="http://cuikangyuan.github.io/2016/01/31/数据结构学习笔记-14/index.html">
+<meta property="og:title" content="数据结构学习笔记-15">
+<meta property="og:url" content="http://cuikangyuan.github.io/2016/02/01/数据结构学习笔记-15/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description" content="栈的基本操作">
-<meta property="og:updated_time" content="2016-01-31T04:40:17.783Z">
+<meta property="og:description" content="利用栈实现二进制转成十进制">
+<meta property="og:updated_time" content="2016-02-01T13:24:14.502Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构学习笔记-14">
-<meta name="twitter:description" content="栈的基本操作">
+<meta name="twitter:title" content="数据结构学习笔记-15">
+<meta name="twitter:description" content="利用栈实现二进制转成十进制">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -151,11 +151,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-数据结构学习笔记-14" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据结构学习笔记-15" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/31/数据结构学习笔记-14/" class="article-date">
-  	<time datetime="2016-01-31T04:38:11.000Z" itemprop="datePublished">2016-01-31</time>
+      <a href="/2016/02/01/数据结构学习笔记-15/" class="article-date">
+  	<time datetime="2016-02-01T13:16:11.000Z" itemprop="datePublished">2016-02-01</time>
 </a>
     </div>
   
@@ -168,7 +168,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      数据结构学习笔记-14
+      数据结构学习笔记-15
     </h1>
   
 
@@ -188,81 +188,58 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u6808_u7684_u57FA_u672C_u64CD_u4F5C"><a href="#u6808_u7684_u57FA_u672C_u64CD_u4F5C" class="headerlink" title="栈的基本操作"></a>栈的基本操作</h2><a id="more"></a>     
+        <h2 id="u5229_u7528_u6808_u5B9E_u73B0_u4E8C_u8FDB_u5236_u8F6C_u6210_u5341_u8FDB_u5236"><a href="#u5229_u7528_u6808_u5B9E_u73B0_u4E8C_u8FDB_u5236_u8F6C_u6210_u5341_u8FDB_u5236" class="headerlink" title="利用栈实现二进制转成十进制"></a>利用栈实现二进制转成十进制</h2><a id="more"></a>     
 <pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
 
-#define ElemType int
-#define STACK_INIT_SIZE 100
-#define STACK_INCREMENT 10
+#define STACK_INIT_SIZE 20
+#define STACKINCREMENT 10
 
+typedef char ElemType;
 typedef struct
 {
     ElemType *base;
     ElemType *top;
-       int stackSize;
-
+    int stackSize;
 }sqStack;
 
-void initStack(sqStack *s)
+void InitStack(sqStack *s)
 {
-    s-&gt;base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType));
+    s-&gt;base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof    (ElemType));
+
     if( !s-&gt;base )
     {
         exit(0);
     }
+
     s-&gt;top = s-&gt;base;
     s-&gt;stackSize = STACK_INIT_SIZE;
 }
 
 void Push(sqStack *s, ElemType e)
 {
-    if(s-&gt;top - s-&gt;base &gt;= s-&gt;stackSize)
+    if( s-&gt;top - s-&gt;base &gt;= s-&gt;stackSize)
     {
-        s-&gt;base = realloc(s-&gt;base, (s-&gt;stackSize+STACK_INCREMENT)*sizeof(ElemType));
+        s-&gt;base = (ElemType *)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT) * sizeof(ElemType));
 
-        if( !s-&gt;base )
+           if( !s-&gt;base )
         {
             exit(0);
         }
-
-        s-&gt;top = s-&gt;base + s-&gt;stackSize;
-        s-&gt;stackSize = s-&gt;stackSize+STACK_INCREMENT;
     }
-
     *(s-&gt;top) = e;
     s-&gt;top++;
-
 }
 
-ElemType * Pop(sqStack *s, ElemType *e)
+void Pop(sqStack *s, ElemType *e)
 {
-    if(s-&gt;top == s-&gt;base)
-        return;
-
-    *e = *--(s-&gt;top);
-
-    return e;
-}
-
-void DestroyStack(sqStack *s)
-{
-    int i, len;
-    len = s-&gt;stackSize;
-
-    for(i=0; i&lt;len; i++)
+    if( s-&gt;top == s-&gt;base )
     {
-        free(s-&gt;base);
-        s-&gt;base++;
+           return;
     }
 
-    s-&gt;base = s-&gt;top = NULL;
-    s-&gt;stackSize = 0;
-}
-
-void ClearStack(sqStack *s)
-{
-    s-&gt;top = s-&gt;base;
+    *e = *--(s-&gt;top);
 }
 
 
@@ -273,7 +250,34 @@ int StackLen(sqStack s)
 
 int main()
 {
+    ElemType c;
+    sqStack s;
 
+    int len, i, sum = 0;
+
+    InitStack(&amp;s);
+
+    printf(&quot;请输入二进制数，输入#号表示结束! \n&quot;);
+    scanf(&quot;%c&quot;, &amp;c);
+
+    while(c != &apos;#&apos;)
+    {
+        Push(&amp;s, c);
+        scanf(&quot;%c&quot;, &amp;c);
+    }
+
+    getchar();
+
+    len = StackLen(s);
+    printf(&quot;栈的当前容量: %d\n&quot;, len);
+
+    for(i=0; i&lt;len; i++)
+    {
+        Pop(&amp;s, &amp;c);
+        sum = sum + (c-48) * pow(2, i);
+    }
+
+    printf(&quot;转化为十进制数为: %d&quot;, sum);
     return 0;
 }
 </code></pre>
@@ -285,18 +289,9 @@ int main()
     
 <nav id="article-nav">
   
-    <a href="/2016/02/01/数据结构学习笔记-15/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          数据结构学习笔记-15
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/30/数据结构学习笔记-13/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构学习笔记-13</div>
+    <a href="/2016/01/31/数据结构学习笔记-14/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构学习笔记-14</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -331,7 +326,7 @@ int main()
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="数据结构学习笔记-14" data-title="数据结构学习笔记-14" data-url="http://cuikangyuan.github.io/2016/01/31/数据结构学习笔记-14/"></div>
+	<div class="ds-thread" data-thread-key="数据结构学习笔记-15" data-title="数据结构学习笔记-15" data-url="http://cuikangyuan.github.io/2016/02/01/数据结构学习笔记-15/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

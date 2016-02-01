@@ -4,6 +4,104 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-15]]></title>
+      <url>http://cuikangyuan.github.io/2016/02/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-15/</url>
+      <content type="html"><![CDATA[<h2 id="u5229_u7528_u6808_u5B9E_u73B0_u4E8C_u8FDB_u5236_u8F6C_u6210_u5341_u8FDB_u5236"><a href="#u5229_u7528_u6808_u5B9E_u73B0_u4E8C_u8FDB_u5236_u8F6C_u6210_u5341_u8FDB_u5236" class="headerlink" title="利用栈实现二进制转成十进制"></a>利用栈实现二进制转成十进制</h2><a id="more"></a>     
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+
+#define STACK_INIT_SIZE 20
+#define STACKINCREMENT 10
+
+typedef char ElemType;
+typedef struct
+{
+    ElemType *base;
+    ElemType *top;
+    int stackSize;
+}sqStack;
+
+void InitStack(sqStack *s)
+{
+    s-&gt;base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof    (ElemType));
+
+    if( !s-&gt;base )
+    {
+        exit(0);
+    }
+
+    s-&gt;top = s-&gt;base;
+    s-&gt;stackSize = STACK_INIT_SIZE;
+}
+
+void Push(sqStack *s, ElemType e)
+{
+    if( s-&gt;top - s-&gt;base &gt;= s-&gt;stackSize)
+    {
+        s-&gt;base = (ElemType *)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT) * sizeof(ElemType));
+
+           if( !s-&gt;base )
+        {
+            exit(0);
+        }
+    }
+    *(s-&gt;top) = e;
+    s-&gt;top++;
+}
+
+void Pop(sqStack *s, ElemType *e)
+{
+    if( s-&gt;top == s-&gt;base )
+    {
+           return;
+    }
+
+    *e = *--(s-&gt;top);
+}
+
+
+int StackLen(sqStack s)
+{
+    return (s.top - s.base);
+}
+
+int main()
+{
+    ElemType c;
+    sqStack s;
+
+    int len, i, sum = 0;
+
+    InitStack(&amp;s);
+
+    printf(&quot;请输入二进制数，输入#号表示结束! \n&quot;);
+    scanf(&quot;%c&quot;, &amp;c);
+
+    while(c != &apos;#&apos;)
+    {
+        Push(&amp;s, c);
+        scanf(&quot;%c&quot;, &amp;c);
+    }
+
+    getchar();
+
+    len = StackLen(s);
+    printf(&quot;栈的当前容量: %d\n&quot;, len);
+
+    for(i=0; i&lt;len; i++)
+    {
+        Pop(&amp;s, &amp;c);
+        sum = sum + (c-48) * pow(2, i);
+    }
+
+    printf(&quot;转化为十进制数为: %d&quot;, sum);
+    return 0;
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-14]]></title>
       <url>http://cuikangyuan.github.io/2016/01/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-14/</url>
       <content type="html"><![CDATA[<h2 id="u6808_u7684_u57FA_u672C_u64CD_u4F5C"><a href="#u6808_u7684_u57FA_u672C_u64CD_u4F5C" class="headerlink" title="栈的基本操作"></a>栈的基本操作</h2><a id="more"></a>     
