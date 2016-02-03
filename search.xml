@@ -4,6 +4,145 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-16]]></title>
+      <url>http://cuikangyuan.github.io/2016/02/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-16/</url>
+      <content type="html"><![CDATA[<h2 id="u9006_u6CE2_u5170_u8FD0_u7B97"><a href="#u9006_u6CE2_u5170_u8FD0_u7B97" class="headerlink" title="逆波兰运算"></a>逆波兰运算</h2><a id="more"></a>     
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define STACK_INIT_SIZE 20
+#define STACKINCREMENT 10
+#define MAXBUFFER 10
+
+typedef double ElemType;
+typedef struct
+{
+    ElemType *base;
+    ElemType *top;
+    int stackSize;
+}sqStack;
+
+InitStack(sqStack *s)
+{
+    s-&gt;base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType));
+
+    if( !s-&gt;base)
+        exit(0);
+
+    s-&gt;top = s-&gt;base;
+    s-&gt;stackSize = STACK_INIT_SIZE;
+
+}
+
+Push(sqStack *s, ElemType e)
+{    
+    if( s-&gt;top - s-&gt;base &gt;= s-&gt;stackSize)
+    {
+        s-&gt;base = (ElemType *)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT)*sizeof(ElemType));
+        if( !s-&gt;base )
+            exit(0);
+
+        s-&gt;top = s-&gt;base + s-&gt;stackSize;
+        s-&gt;stackSize = s-&gt;stackSize + STACKINCREMENT;
+
+    }
+
+    *(s-&gt;top) = e;
+    s-&gt;top++;
+}
+
+Pop(sqStack *s, ElemType *e)
+{
+    if(s-&gt;top == s-&gt;base)
+           return;
+
+    *e = *--(s-&gt;top);
+}
+
+int StackLen(sqStack *s)
+{
+    return (s-&gt;top - s-&gt;base);
+}
+
+int main()
+{
+    sqStack s;
+    char c;
+    double d, e;
+    char str[MAXBUFFER];
+    int i = 0;
+
+
+    InitStack(&amp;s);
+
+    printf(&quot;请按逆波兰表达式输入待计算数据，以空格为间隔符，#为结束符: \n&quot;);
+    scanf(&quot;%c&quot;, &amp;c);
+
+    while( c != &apos;#&apos;)
+    {
+        while( isdigit(c) || c==&apos;.&apos;)
+        {
+            str[i++] = c;
+            str[i] = &apos;\0&apos;;
+            if( i &gt;= 10)
+            {
+                printf(&quot;输入的单个数据过大! \n&quot;);
+                return -1;
+            }
+            scanf(&quot;%c&quot;, &amp;c);
+            if( c == &apos; &apos;)
+            {
+                d = atof(str);
+                Push(&amp;s, d);
+                i = 0;
+                break;
+               }
+        }
+
+        switch( c )
+        {
+            case &apos;+&apos;:
+                Pop(&amp;s, &amp;d);
+                Pop(&amp;s, &amp;e);
+                Push(&amp;s, d + e);
+                break;
+            case &apos;-&apos;:
+                Pop(&amp;s, &amp;d);
+                Pop(&amp;s, &amp;e);
+                Push(&amp;s, e - d);
+                break;
+            case &apos;*&apos;:
+                Pop(&amp;s, &amp;d);
+                Pop(&amp;s, &amp;e);
+                Push(&amp;s, d*e);
+                break;
+            case &apos;/&apos;:
+                Pop(&amp;s, &amp;d);
+                Pop(&amp;s, &amp;e);
+                if(d != 0)
+                {
+                    Push(&amp;s, e/d);
+                }
+                else
+                {
+                    printf(&quot;\n除数为零!\n&quot;);
+                    return -1;
+                }
+                break;
+        }
+
+        scanf(&quot;%c&quot;, &amp;c);
+    }
+
+    Pop(&amp;s, &amp;d);
+    printf(&quot;最终的计算结果是%f\n&quot;, d);
+    return 0;
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-15]]></title>
       <url>http://cuikangyuan.github.io/2016/02/01/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-15/</url>
       <content type="html"><![CDATA[<h2 id="u5229_u7528_u6808_u5B9E_u73B0_u4E8C_u8FDB_u5236_u8F6C_u6210_u5341_u8FDB_u5236"><a href="#u5229_u7528_u6808_u5B9E_u73B0_u4E8C_u8FDB_u5236_u8F6C_u6210_u5341_u8FDB_u5236" class="headerlink" title="利用栈实现二进制转成十进制"></a>利用栈实现二进制转成十进制</h2><a id="more"></a>     
