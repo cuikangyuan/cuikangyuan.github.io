@@ -4,6 +4,150 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-17]]></title>
+      <url>http://cuikangyuan.github.io/2016/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-17/</url>
+      <content type="html"><![CDATA[<h2 id="u4E2D_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F_u8F6C_u5316_u4E3A_u540E_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F"><a href="#u4E2D_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F_u8F6C_u5316_u4E3A_u540E_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F" class="headerlink" title="中缀计算表达式转化为后缀计算表达式"></a>中缀计算表达式转化为后缀计算表达式</h2><a id="more"></a>     
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define STACK_INIT_SIZE 20
+#define STACKINCREMENT 10
+#define MAXBUFFER 10
+
+typedef char ElemType;
+typedef struct
+{
+    ElemType *base;
+    ElemType *top;
+    int stackSize;
+}sqStack;
+
+InitStack(sqStack *s)
+{
+    s-&gt;base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType));
+
+    if( !s-&gt;base)
+        exit(0);
+
+    s-&gt;top = s-&gt;base;
+    s-&gt;stackSize = STACK_INIT_SIZE;
+
+}
+
+Push(sqStack *s, ElemType e)
+{
+    if( s-&gt;top - s-&gt;base &gt;= s-&gt;stackSize)
+    {
+        s-&gt;base = (ElemType *)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT)*sizeof(ElemType));
+        if( !s-&gt;base )
+        exit(0);
+
+        s-&gt;top = s-&gt;base + s-&gt;stackSize;
+        s-&gt;stackSize = s-&gt;stackSize + STACKINCREMENT;
+
+    }
+
+    *(s-&gt;top) = e;
+    s-&gt;top++;
+}
+
+Pop(sqStack *s, ElemType *e)
+{
+    if(s-&gt;top == s-&gt;base)
+        return;
+
+    *e = *--(s-&gt;top);
+}
+
+int StackLen(sqStack *s)
+{
+    return (s-&gt;top - s-&gt;base);
+}
+
+int main()
+{
+    sqStack s;
+    char c, e;
+
+    InitStack(&amp;s);
+
+    printf(&quot;请输入中缀表达式，以#为结束符: \n&quot;);
+    scanf(&quot;%c&quot;, &amp;c);
+
+    while( c != &apos;#&apos;)
+    {
+        while( isdigit(c) )
+        {
+            printf(&quot;%c&quot;, c);
+            scanf(&quot;%c&quot;, &amp;c);
+            if( !isdigit(c) )
+            {
+                printf(&quot; &quot;);
+            }
+        }
+        if( &apos;)&apos; == c )
+        {
+            Pop(&amp;s, &amp;e);
+            while( &apos;(&apos; != e)
+            {
+                printf(&quot;%c &quot;, e);
+                Pop(&amp;s, &amp;e);
+            }
+        }
+        else if( &apos;+&apos;==c || &apos;-&apos;==c)
+        {
+            if ( !StackLen(&amp;s))
+            {
+                Push(&amp;s, c);
+            }
+            else
+            {
+                do
+                {
+                    Pop(&amp;s, &amp;e);
+                    if( &apos;(&apos; == e)
+                    {
+                        Push(&amp;s, e);
+                    }
+                    else
+                    {
+                        printf(&quot;%c &quot;, e);
+                    }
+                }while( StackLen(&amp;s) &amp;&amp; &apos;(&apos; != e );
+
+            }
+            Push(&amp;s, c);
+
+        }
+        else if( &apos;*&apos;==c || &apos;/&apos;==c || &apos;(&apos;==c )
+        {
+            Push(&amp;s, c);
+        }
+        else if( &apos;#&apos;==c)
+        {
+            break;
+        }
+        else
+        {
+            printf(&quot;\n出错，输入错误&quot;);
+            return -1;
+        }
+        scanf(&quot;%c&quot;, &amp;c);
+    }
+
+    while( StackLen(&amp;s))
+    {
+        Pop(&amp;s, &amp;e);
+        printf(&quot;%c &quot;, e);
+    }
+
+    return 0;
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-16]]></title>
       <url>http://cuikangyuan.github.io/2016/02/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-16/</url>
       <content type="html"><![CDATA[<h2 id="u9006_u6CE2_u5170_u8FD0_u7B97"><a href="#u9006_u6CE2_u5170_u8FD0_u7B97" class="headerlink" title="逆波兰运算"></a>逆波兰运算</h2><a id="more"></a>     

@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>数据结构学习笔记-16 | Tim.cui</title>
+  <title>数据结构学习笔记-17 | Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="逆波兰运算">
+  <meta name="description" content="中缀计算表达式转化为后缀计算表达式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构学习笔记-16">
-<meta property="og:url" content="http://cuikangyuan.github.io/2016/02/03/数据结构学习笔记-16/index.html">
+<meta property="og:title" content="数据结构学习笔记-17">
+<meta property="og:url" content="http://cuikangyuan.github.io/2016/02/05/数据结构学习笔记-17/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description" content="逆波兰运算">
-<meta property="og:updated_time" content="2016-02-03T14:58:16.173Z">
+<meta property="og:description" content="中缀计算表达式转化为后缀计算表达式">
+<meta property="og:updated_time" content="2016-02-05T14:21:34.108Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构学习笔记-16">
-<meta name="twitter:description" content="逆波兰运算">
+<meta name="twitter:title" content="数据结构学习笔记-17">
+<meta name="twitter:description" content="中缀计算表达式转化为后缀计算表达式">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -151,11 +151,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-数据结构学习笔记-16" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据结构学习笔记-17" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/03/数据结构学习笔记-16/" class="article-date">
-  	<time datetime="2016-02-03T14:55:11.000Z" itemprop="datePublished">2016-02-03</time>
+      <a href="/2016/02/05/数据结构学习笔记-17/" class="article-date">
+  	<time datetime="2016-02-05T14:17:11.000Z" itemprop="datePublished">2016-02-05</time>
 </a>
     </div>
   
@@ -168,7 +168,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      数据结构学习笔记-16
+      数据结构学习笔记-17
     </h1>
   
 
@@ -188,7 +188,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u9006_u6CE2_u5170_u8FD0_u7B97"><a href="#u9006_u6CE2_u5170_u8FD0_u7B97" class="headerlink" title="逆波兰运算"></a>逆波兰运算</h2><a id="more"></a>     
+        <h2 id="u4E2D_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F_u8F6C_u5316_u4E3A_u540E_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F"><a href="#u4E2D_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F_u8F6C_u5316_u4E3A_u540E_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F" class="headerlink" title="中缀计算表达式转化为后缀计算表达式"></a>中缀计算表达式转化为后缀计算表达式</h2><a id="more"></a>     
 <pre><code>#include &lt;stdio.h&gt;
 #include &lt;ctype.h&gt;
 #include &lt;stdlib.h&gt;
@@ -197,7 +197,7 @@
 #define STACKINCREMENT 10
 #define MAXBUFFER 10
 
-typedef double ElemType;
+typedef char ElemType;
 typedef struct
 {
     ElemType *base;
@@ -218,12 +218,12 @@ InitStack(sqStack *s)
 }
 
 Push(sqStack *s, ElemType e)
-{    
+{
     if( s-&gt;top - s-&gt;base &gt;= s-&gt;stackSize)
     {
         s-&gt;base = (ElemType *)realloc(s-&gt;base, (s-&gt;stackSize + STACKINCREMENT)*sizeof(ElemType));
         if( !s-&gt;base )
-            exit(0);
+        exit(0);
 
         s-&gt;top = s-&gt;base + s-&gt;stackSize;
         s-&gt;stackSize = s-&gt;stackSize + STACKINCREMENT;
@@ -237,7 +237,7 @@ Push(sqStack *s, ElemType e)
 Pop(sqStack *s, ElemType *e)
 {
     if(s-&gt;top == s-&gt;base)
-           return;
+        return;
 
     *e = *--(s-&gt;top);
 }
@@ -250,75 +250,80 @@ int StackLen(sqStack *s)
 int main()
 {
     sqStack s;
-    char c;
-    double d, e;
-    char str[MAXBUFFER];
-    int i = 0;
-
+    char c, e;
 
     InitStack(&amp;s);
 
-    printf(&quot;请按逆波兰表达式输入待计算数据，以空格为间隔符，#为结束符: \n&quot;);
+    printf(&quot;请输入中缀表达式，以#为结束符: \n&quot;);
     scanf(&quot;%c&quot;, &amp;c);
 
     while( c != &apos;#&apos;)
     {
-        while( isdigit(c) || c==&apos;.&apos;)
+        while( isdigit(c) )
         {
-            str[i++] = c;
-            str[i] = &apos;\0&apos;;
-            if( i &gt;= 10)
-            {
-                printf(&quot;输入的单个数据过大! \n&quot;);
-                return -1;
-            }
+            printf(&quot;%c&quot;, c);
             scanf(&quot;%c&quot;, &amp;c);
-            if( c == &apos; &apos;)
+            if( !isdigit(c) )
             {
-                d = atof(str);
-                Push(&amp;s, d);
-                i = 0;
-                break;
-               }
+                printf(&quot; &quot;);
+            }
         }
-
-        switch( c )
+        if( &apos;)&apos; == c )
         {
-            case &apos;+&apos;:
-                Pop(&amp;s, &amp;d);
+            Pop(&amp;s, &amp;e);
+            while( &apos;(&apos; != e)
+            {
+                printf(&quot;%c &quot;, e);
                 Pop(&amp;s, &amp;e);
-                Push(&amp;s, d + e);
-                break;
-            case &apos;-&apos;:
-                Pop(&amp;s, &amp;d);
-                Pop(&amp;s, &amp;e);
-                Push(&amp;s, e - d);
-                break;
-            case &apos;*&apos;:
-                Pop(&amp;s, &amp;d);
-                Pop(&amp;s, &amp;e);
-                Push(&amp;s, d*e);
-                break;
-            case &apos;/&apos;:
-                Pop(&amp;s, &amp;d);
-                Pop(&amp;s, &amp;e);
-                if(d != 0)
-                {
-                    Push(&amp;s, e/d);
-                }
-                else
-                {
-                    printf(&quot;\n除数为零!\n&quot;);
-                    return -1;
-                }
-                break;
+            }
         }
+        else if( &apos;+&apos;==c || &apos;-&apos;==c)
+        {
+            if ( !StackLen(&amp;s))
+            {
+                Push(&amp;s, c);
+            }
+            else
+            {
+                do
+                {
+                    Pop(&amp;s, &amp;e);
+                    if( &apos;(&apos; == e)
+                    {
+                        Push(&amp;s, e);
+                    }
+                    else
+                    {
+                        printf(&quot;%c &quot;, e);
+                    }
+                }while( StackLen(&amp;s) &amp;&amp; &apos;(&apos; != e );
 
+            }
+            Push(&amp;s, c);
+
+        }
+        else if( &apos;*&apos;==c || &apos;/&apos;==c || &apos;(&apos;==c )
+        {
+            Push(&amp;s, c);
+        }
+        else if( &apos;#&apos;==c)
+        {
+            break;
+        }
+        else
+        {
+            printf(&quot;\n出错，输入错误&quot;);
+            return -1;
+        }
         scanf(&quot;%c&quot;, &amp;c);
     }
 
-    Pop(&amp;s, &amp;d);
-    printf(&quot;最终的计算结果是%f\n&quot;, d);
+    while( StackLen(&amp;s))
+    {
+        Pop(&amp;s, &amp;e);
+        printf(&quot;%c &quot;, e);
+    }
+
     return 0;
 }
 </code></pre>
@@ -330,18 +335,9 @@ int main()
     
 <nav id="article-nav">
   
-    <a href="/2016/02/05/数据结构学习笔记-17/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          数据结构学习笔记-17
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/02/01/数据结构学习笔记-15/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构学习笔记-15</div>
+    <a href="/2016/02/03/数据结构学习笔记-16/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构学习笔记-16</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -376,7 +372,7 @@ int main()
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="数据结构学习笔记-16" data-title="数据结构学习笔记-16" data-url="http://cuikangyuan.github.io/2016/02/03/数据结构学习笔记-16/"></div>
+	<div class="ds-thread" data-thread-key="数据结构学习笔记-17" data-title="数据结构学习笔记-17" data-url="http://cuikangyuan.github.io/2016/02/05/数据结构学习笔记-17/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
