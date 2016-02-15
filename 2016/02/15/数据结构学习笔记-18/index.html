@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Tag: 数据结构 | Tim.cui</title>
+  <title>数据结构学习笔记-18 | Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tim.cui">
-<meta property="og:url" content="http://cuikangyuan.github.io/tags/数据结构/index.html">
+  <meta name="description" content="队列的链式存储结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构学习笔记-18">
+<meta property="og:url" content="http://cuikangyuan.github.io/2016/02/15/数据结构学习笔记-18/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description">
+<meta property="og:description" content="队列的链式存储结构">
+<meta property="og:updated_time" content="2016-02-15T15:01:17.095Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tim.cui">
-<meta name="twitter:description">
+<meta name="twitter:title" content="数据结构学习笔记-18">
+<meta name="twitter:description" content="队列的链式存储结构">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -150,181 +151,164 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-数据结构学习笔记-18" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/02/15/数据结构学习笔记-18/" class="article-date">
+  	<time datetime="2016-02-15T14:59:11.000Z" itemprop="datePublished">2016-02-15</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据结构学习笔记-18
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/02/15/数据结构学习笔记-18/" class="archive-article-date">
-  	<time datetime="2016-02-15T14:59:11.000Z" itemprop="datePublished">Feb 15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/15/数据结构学习笔记-18/">数据结构学习笔记-18</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u961F_u5217_u7684_u94FE_u5F0F_u5B58_u50A8_u7ED3_u6784"><a href="#u961F_u5217_u7684_u94FE_u5F0F_u5B58_u50A8_u7ED3_u6784" class="headerlink" title="队列的链式存储结构"></a>队列的链式存储结构</h2><a id="more"></a>     
+<pre><code>typedef struct QNode {
+    ElemType data;
+    struct QNode *next;
+} QNode, *QueuePrt;
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
+typedef struct {
+    QueuePrt front, rear;//队头尾指针
+}LinkQueue;
 
-          
+initQueue(LinkQueue *q)
+{
+    q-&gt;front = q-&gt;rear = (QueuePrt)malloc(sizeof(QNode));
+    if( !q-&gt;front)
+        exit(0);
+    q-&gt;front-&gt;next = NULL;
+}
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+insertQueue(LinkQueue *q, ElemType e)
+{
+    QueuePrt p;
+    p = (QueuePrt)malloc(sizeof(QNode));
+
+    if( p == NULL)
+        exit(0);
+    p-&gt;data = e;
+    p-&gt;next = NULL;
+    q-&gt;rear-&gt;next = p;
+    q-&gt;rear = p;
+}
+
+DeleteQueue(LinkQueue *q, ElemType *e)
+{
+    QueuePrt p;
+    if( q-&gt;front == q-&gt;rear )
+        return;
+    p = q-&gt;front-&gt;next;
+    *e = p-&gt;data;
+    q-&gt;front-&gt;next = p-&gt;next;
+
+    if( q-&gt;rear == p)
+        q-&gt;rear = q-&gt;front;
+
+    free(p);
+
+}
+
+DestroyQueue(LinkQueue *q)
+{
+    while( q-&gt;front )
+    {
+        q-&gt;rear = q-&gt;front-&gt;next;
+        free( q-&gt;front );
+        q-&gt;front = q-&gt;rear;
+    }
+}
+</code></pre>
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/02/05/数据结构学习笔记-17/" class="archive-article-date">
-  	<time datetime="2016-02-05T14:17:11.000Z" itemprop="datePublished">Feb 5</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/05/数据结构学习笔记-17/">数据结构学习笔记-17</a>
-    </h1>
   
+    <a href="/2016/02/05/数据结构学习笔记-17/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构学习笔记-17</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/02/03/数据结构学习笔记-16/" class="archive-article-date">
-  	<time datetime="2016-02-03T14:55:11.000Z" itemprop="datePublished">Feb 3</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/03/数据结构学习笔记-16/">数据结构学习笔记-16</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/02/01/数据结构学习笔记-15/" class="archive-article-date">
-  	<time datetime="2016-02-01T13:16:11.000Z" itemprop="datePublished">Feb 1</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/01/数据结构学习笔记-15/">数据结构学习笔记-15</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="数据结构学习笔记-18" data-title="数据结构学习笔记-18" data-url="http://cuikangyuan.github.io/2016/02/15/数据结构学习笔记-18/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/31/数据结构学习笔记-14/" class="archive-article-date">
-  	<time datetime="2016-01-31T04:38:11.000Z" itemprop="datePublished">Jan 31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/31/数据结构学习笔记-14/">数据结构学习笔记-14</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/数据结构/page/2/">2</a><a class="page-number" href="/tags/数据结构/page/3/">3</a><a class="page-number" href="/tags/数据结构/page/4/">4</a><a class="extend next" rel="next" href="/tags/数据结构/page/2/">Next &raquo;</a>
-    </nav>
-  
 
 </div>
       <footer id="footer">
@@ -350,9 +334,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}

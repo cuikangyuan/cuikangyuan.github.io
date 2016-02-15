@@ -4,6 +4,68 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-18]]></title>
+      <url>http://cuikangyuan.github.io/2016/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-18/</url>
+      <content type="html"><![CDATA[<h2 id="u961F_u5217_u7684_u94FE_u5F0F_u5B58_u50A8_u7ED3_u6784"><a href="#u961F_u5217_u7684_u94FE_u5F0F_u5B58_u50A8_u7ED3_u6784" class="headerlink" title="队列的链式存储结构"></a>队列的链式存储结构</h2><a id="more"></a>     
+<pre><code>typedef struct QNode {
+    ElemType data;
+    struct QNode *next;
+} QNode, *QueuePrt;
+
+typedef struct {
+    QueuePrt front, rear;//队头尾指针
+}LinkQueue;
+
+initQueue(LinkQueue *q)
+{
+    q-&gt;front = q-&gt;rear = (QueuePrt)malloc(sizeof(QNode));
+    if( !q-&gt;front)
+        exit(0);
+    q-&gt;front-&gt;next = NULL;
+}
+
+insertQueue(LinkQueue *q, ElemType e)
+{
+    QueuePrt p;
+    p = (QueuePrt)malloc(sizeof(QNode));
+
+    if( p == NULL)
+        exit(0);
+    p-&gt;data = e;
+    p-&gt;next = NULL;
+    q-&gt;rear-&gt;next = p;
+    q-&gt;rear = p;
+}
+
+DeleteQueue(LinkQueue *q, ElemType *e)
+{
+    QueuePrt p;
+    if( q-&gt;front == q-&gt;rear )
+        return;
+    p = q-&gt;front-&gt;next;
+    *e = p-&gt;data;
+    q-&gt;front-&gt;next = p-&gt;next;
+
+    if( q-&gt;rear == p)
+        q-&gt;rear = q-&gt;front;
+
+    free(p);
+
+}
+
+DestroyQueue(LinkQueue *q)
+{
+    while( q-&gt;front )
+    {
+        q-&gt;rear = q-&gt;front-&gt;next;
+        free( q-&gt;front );
+        q-&gt;front = q-&gt;rear;
+    }
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-17]]></title>
       <url>http://cuikangyuan.github.io/2016/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-17/</url>
       <content type="html"><![CDATA[<h2 id="u4E2D_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F_u8F6C_u5316_u4E3A_u540E_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F"><a href="#u4E2D_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F_u8F6C_u5316_u4E3A_u540E_u7F00_u8BA1_u7B97_u8868_u8FBE_u5F0F" class="headerlink" title="中缀计算表达式转化为后缀计算表达式"></a>中缀计算表达式转化为后缀计算表达式</h2><a id="more"></a>     
