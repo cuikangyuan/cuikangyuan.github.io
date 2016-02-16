@@ -4,6 +4,47 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-19]]></title>
+      <url>http://cuikangyuan.github.io/2016/02/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-19/</url>
+      <content type="html"><![CDATA[<h2 id="u961F_u5217_u7684_u987A_u5E8F_u5B58_u50A8_u7ED3_u6784"><a href="#u961F_u5217_u7684_u987A_u5E8F_u5B58_u50A8_u7ED3_u6784" class="headerlink" title="队列的顺序存储结构"></a>队列的顺序存储结构</h2><a id="more"></a>     
+<pre><code>#define MAXSIZE 100
+
+typedef struct
+{
+    ElemType *base;
+
+    int front;
+    int rear;
+}cycleQueue;
+
+initQueue(cycleQueue *q)
+{
+    q-&gt;base = (ElemType *)malloc(MAXSIZE * sizeof(ElemType));
+
+    if( !q-&gt;base)
+        exit(0);
+    q-&gt;front = q-&gt;rear = 0;
+}
+
+insertQueue(cycleQueue *q, ElemType e)
+{
+    if( (q-&gt;rear+1)%MAXSIZE == q-&gt;front)
+        return;
+    q-&gt;base[q-&gt;rear]= e;
+    q-&gt;rear = (q-&gt;rear+1) % MAXSIZE;
+}
+
+deleteQueue(cycleQueue *q, ElemType *e)
+{
+    if( q-&gt;front == q-&gt;rear)
+        return;
+    *e = q-&gt;base[q-&gt;front];
+    q-&gt;front = (q-&gt;front+1) % MAXSIZE;
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-18]]></title>
       <url>http://cuikangyuan.github.io/2016/02/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-18/</url>
       <content type="html"><![CDATA[<h2 id="u961F_u5217_u7684_u94FE_u5F0F_u5B58_u50A8_u7ED3_u6784"><a href="#u961F_u5217_u7684_u94FE_u5F0F_u5B58_u50A8_u7ED3_u6784" class="headerlink" title="队列的链式存储结构"></a>队列的链式存储结构</h2><a id="more"></a>     
