@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记-20]]></title>
+      <url>http://cuikangyuan.github.io/2016/02/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-20/</url>
+      <content type="html"><![CDATA[<h2 id="u6C49_u8BFA_u5854"><a href="#u6C49_u8BFA_u5854" class="headerlink" title="汉诺塔"></a>汉诺塔</h2><a id="more"></a>     
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void move(int n, char x, char y, char z)
+{
+    if( 1 == n )
+    {
+        printf(&quot;%c---&gt;%c\n&quot;, x, z);
+    }
+    else
+    {
+        move(n-1, x, z, y); //n-1个盘子从x借助z移动到y
+        printf(&quot;%c---&gt;%c\n&quot;, x, z); //将第n个盘子从x 移动到z
+        move(n-1, y, x, z); //n-1个盘子从y借助x移动到z
+    }
+}
+
+int main()
+{
+    int n;
+    scanf(&quot;%d&quot;, &amp;n);
+    move(n, &apos;X&apos;, &apos;Y&apos;, &apos;Z&apos;);
+    return 0;
+}
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记-19]]></title>
       <url>http://cuikangyuan.github.io/2016/02/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-19/</url>
       <content type="html"><![CDATA[<h2 id="u961F_u5217_u7684_u987A_u5E8F_u5B58_u50A8_u7ED3_u6784"><a href="#u961F_u5217_u7684_u987A_u5E8F_u5B58_u50A8_u7ED3_u6784" class="headerlink" title="队列的顺序存储结构"></a>队列的顺序存储结构</h2><a id="more"></a>     
