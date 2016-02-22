@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>数据结构学习笔记-20 | Tim.cui</title>
+  <title>数据结构学习笔记-21 | Tim.cui</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="汉诺塔">
+  <meta name="description" content="八皇后">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构学习笔记-20">
-<meta property="og:url" content="http://cuikangyuan.github.io/2016/02/21/数据结构学习笔记-20/index.html">
+<meta property="og:title" content="数据结构学习笔记-21">
+<meta property="og:url" content="http://cuikangyuan.github.io/2016/02/22/数据结构学习笔记-21/index.html">
 <meta property="og:site_name" content="Tim.cui">
-<meta property="og:description" content="汉诺塔">
-<meta property="og:updated_time" content="2016-02-21T12:09:00.168Z">
+<meta property="og:description" content="八皇后">
+<meta property="og:updated_time" content="2016-02-22T13:55:08.345Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构学习笔记-20">
-<meta name="twitter:description" content="汉诺塔">
+<meta name="twitter:title" content="数据结构学习笔记-21">
+<meta name="twitter:description" content="八皇后">
   
     <link rel="alternative" href="/atom.xml" title="Tim.cui" type="application/atom+xml">
   
@@ -151,11 +151,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-数据结构学习笔记-20" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据结构学习笔记-21" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/21/数据结构学习笔记-20/" class="article-date">
-  	<time datetime="2016-02-21T12:08:11.000Z" itemprop="datePublished">2016-02-21</time>
+      <a href="/2016/02/22/数据结构学习笔记-21/" class="article-date">
+  	<time datetime="2016-02-22T13:52:11.000Z" itemprop="datePublished">2016-02-22</time>
 </a>
     </div>
   
@@ -168,7 +168,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      数据结构学习笔记-20
+      数据结构学习笔记-21
     </h1>
   
 
@@ -188,29 +188,139 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u6C49_u8BFA_u5854"><a href="#u6C49_u8BFA_u5854" class="headerlink" title="汉诺塔"></a>汉诺塔</h2><a id="more"></a>     
+        <h2 id="u516B_u7687_u540E"><a href="#u516B_u7687_u540E" class="headerlink" title="八皇后"></a>八皇后</h2><a id="more"></a>     
 <pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
-void move(int n, char x, char y, char z)
+int count = 0;
+
+int noDanger(int row, int column, int     (*chess)[8] )
 {
-    if( 1 == n )
+    int i, k, flag1=0, flag2=0, flag3=0, flag4=0, flag5=0;
+
+    //判断列方向
+    for( i=0; i&lt;8; i++)
     {
-        printf(&quot;%c---&gt;%c\n&quot;, x, z);
+        if( *(*(chess+i)+column) != 0)
+        {
+            flag1 = 1;
+            break;
+        }
+    }
+
+    //判断左上方
+    for( i=row, k=column; i&gt;=0 &amp;&amp; k&gt;=0; i--, k--)
+    {
+        if( *(*(chess+i)+k) != 0)
+        {
+            flag2 = 1;
+            break;
+        }
+    }
+
+    //判断右下方
+    for( i=row, k=column; i&lt;8 &amp;&amp; k&lt;8; i++, k++)
+    {
+        if( *(*(chess+i)+k) != 0)
+        {
+            flag3 = 1;
+            break;
+        }
+    }
+    //判断右上方
+    for( i=row, k=column; i&gt;=0 &amp;&amp; k&lt;8; i--, k++)
+    {
+        if( *(*(chess+i)+k) != 0)
+        {
+            flag4 = 1;
+            break;
+        }
+    }
+    //判断左下方
+    for( i=row, k=column; i&lt;8 &amp;&amp; k&gt;=0; i++, k--)
+    {
+        if( *(*(chess+i)+k) != 0)
+        {
+            flag5 = 1;
+            break;
+        }
+    }
+
+    if( flag1 || flag2 || flag3 || flag4 || flag5)
+    {
+        return 0;
     }
     else
     {
-        move(n-1, x, z, y); //n-1个盘子从x借助z移动到y
-        printf(&quot;%c---&gt;%c\n&quot;, x, z); //将第n个盘子从x 移动到z
-        move(n-1, y, x, z); //n-1个盘子从y借助x移动到z
+        return 1;
     }
 }
 
+//row表示起始行, column表示列数, (*chess)[8]表示指向棋盘每一行的指针
+void EightQueen( int row, int column, int     (*chess)[8])
+{
+     int chess2[8][8], i, j;
+
+     for( i=0; i&lt;8; i++)
+     {
+         for(j=0; j&lt;8; j++)
+         {
+             chess2[i][j] = chess[i][j];
+         }
+     }
+
+     if( 8 == row)
+     {
+         printf(&quot;第 %d 种\n&quot;, count+1);
+         for( i=0; i&lt;8; i++)
+         {
+             for( j=0; j&lt;8; j++)
+             {
+                printf(&quot;%d &quot;, *(*(chess2+i)+j));
+             }
+             printf(&quot;\n&quot;);
+         }
+         printf(&quot;\n&quot;);
+         count++;
+     }
+     else
+     {
+
+         for( j=0; j&lt;column; j++)
+         {
+             //判断位置是否可放置
+             if( noDanger( row, j, chess ))
+             {
+                for( i=0; i&lt;8; i++)
+                {
+                    *(*(chess2+row)+i) = 0;
+                }
+
+                *(*(chess2+row)+j) = 1;
+
+                EightQueen( row+1, column, chess2 );
+             }
+         }
+     }
+}
+
+
 int main()
 {
-    int n;
-    scanf(&quot;%d&quot;, &amp;n);
-    move(n, &apos;X&apos;, &apos;Y&apos;, &apos;Z&apos;);
+    int chess[8][8], i, j;
+
+    for( i=0; i&lt;8; i++ )
+    {
+        for( j=0; j&lt;8; j++)
+        {
+            chess[i][j] = 0;
+        }
+    }
+
+    EightQueen( 0, 8, chess);
+
+    printf(&quot;总共 %d 种解决方法\n\n&quot;, count);
+
     return 0;
 }
 </code></pre>
@@ -222,18 +332,9 @@ int main()
     
 <nav id="article-nav">
   
-    <a href="/2016/02/22/数据结构学习笔记-21/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          数据结构学习笔记-21
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/02/16/数据结构学习笔记-19/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构学习笔记-19</div>
+    <a href="/2016/02/21/数据结构学习笔记-20/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构学习笔记-20</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -268,7 +369,7 @@ int main()
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="数据结构学习笔记-20" data-title="数据结构学习笔记-20" data-url="http://cuikangyuan.github.io/2016/02/21/数据结构学习笔记-20/"></div>
+	<div class="ds-thread" data-thread-key="数据结构学习笔记-21" data-title="数据结构学习笔记-21" data-url="http://cuikangyuan.github.io/2016/02/22/数据结构学习笔记-21/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -152,6 +152,80 @@
 
       <div class="body-wrap">
   
+    <article id="post-数据结构学习笔记-11" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/24/数据结构学习笔记-11/" class="article-date">
+  	<time datetime="2016-01-24T08:05:11.000Z" itemprop="datePublished">2016-01-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/24/数据结构学习笔记-11/">数据结构学习笔记-11</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u5FAA_u73AF_u94FE_u8868_u5408_u5E76"><a href="#u5FAA_u73AF_u94FE_u8868_u5408_u5E76" class="headerlink" title="循环链表合并"></a>循环链表合并</h2><pre><code>//假设A， B为非空循环链表的尾指针
+LinkList Connect(LinkList A, LinkList B)
+{
+    //保存A表的头结点位置
+    LinkList p = A-&gt;next;
+
+    //B表的开始结点链接到A表尾
+    A-&gt;next = B-&gt;next-&gt;next;
+
+    //释放B表头结点
+    free(B-&gt;next);
+
+    B-&gt;next = p;
+
+    //返回新循环链表的尾指针
+    return B; 
+
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-数据结构学习笔记-10" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -380,66 +454,6 @@ typedef struct CLinkList
       
         <p class="article-more-link">
           <a  href="/2016/01/20/数据结构学习笔记-7/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-数据结构学习笔记-6" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/20/数据结构学习笔记-6/" class="article-date">
-  	<time datetime="2016-01-20T11:57:03.000Z" itemprop="datePublished">2016-01-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/20/数据结构学习笔记-6/">数据结构学习笔记-6</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u9759_u6001_u94FE_u8868_u7684_u5220_u9664_u64CD_u4F5C"><a href="#u9759_u6001_u94FE_u8868_u7684_u5220_u9664_u64CD_u4F5C" class="headerlink" title="静态链表的删除操作"></a>静态链表的删除操作</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/20/数据结构学习笔记-6/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
